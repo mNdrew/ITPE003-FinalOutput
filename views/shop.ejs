@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Log In</title>
+    <title>ShopName - Available Items</title>
     <meta charset="utf-8">
     <!-- IMPORT STYLE.CSS -->
     <link rel="stylesheet" type="text/css" href="/public/css/style.css">
@@ -18,11 +18,11 @@
 
 </head>
 <body>
-    <nav class="navbar bg-body-tertiary d-flex justify-content-center text-center">
-        <div class="container-fluid py-3">
-          <a class="navbar-brand text-center" href="#">ShopName</a>
+    <nav class="navbar bg-body-tertiary d-flex justify-content-center text-center" id="top">
+        <div class="container-fluid py-4">
+          <a class="navbar-brand text-center" href="/shop"><h1>ShopName</h1></a>
         </div>
-        <div class="row">
+        <div class="row py-2">
             <table class="nav-link">
                 <tr>
                     <td class="px-3"><a class="nav-link" href="/">Home</a></td>
@@ -30,13 +30,12 @@
                     <td class="px-3"><a class="nav-link" href="/mycart">My Cart</a></td>
                     <td class="px-3"><a class="nav-link" href="/myaccount">My Account</a></td>
                     <td class="px-3"><a class="nav-link" href="/about">About Us</a></td>
-
                 </tr>
             </table>
         </div> 
     </nav>
 
-    <main>
+    <main class="justify-content-center">
         <!-- INSERT CONTENT HERE -->
 
         <div>
@@ -52,29 +51,35 @@
         </div>
 
        <!-- SHOP -->
-       <table class="table table-striped">
+       <table class="table border table-striped">
         <thead>
-            <th class="shopTableLabel">Item Name</th>
-            <th class="shopTableLabel">Price</th>
-            <th class="shopTableLabel">Availability</th>
-            <th class="shopTableLabel">Image</th>
-            <th class="shopTableLabel">Order</th>
+            <th class="shopTableLabel border">Item Name</th>
+            <th class="shopTableLabel border">Price</th>
+            <th class="shopTableLabel border">Availability</th>
+            <th class="shopTableLabel border">Image</th>
+            <th class="shopTableLabel border">Quantity</th>
+            <th class="shopTableLabel border">Order</th>
         </thead>
-        <tbody>
+        <tbody class="border">
             <% data.forEach((item) => { %>
             <tr class="shopTableItem">
-                <td class="shopItemLabel"><%= item.title %></td>
-                <td class="text-align-center minWidth-50" id="">
+                <td class="shopItemLabel border">
+                    <%= item.title %>
+                </td>
+                <td class="text-align-center minWidth-50 border" id="">
                      ₱ <%= item.price %>
                 </td>
-                <td class="text-align-center minWidth-50">
+                <td class="text-align-center minWidth-50 border">
                     <%= item.availability %>
                 </td>
-                <td class="text-align-center minWidth-50">
+                <td class="text-align-center minWidth-50 border">
                     <img src="<%= item.imageLink %>" alt="<%= item.title%>" class="img-thumb">
                 </td>
-                <td>
-                    <a class="btn btn-success" type="button" id="<%= item._id%>">Add to Cart</a>
+                <td class="text-align-center formValign-mid border">
+                    <input type="number" class="form-control" id="quantity" name="quantity" min="0" max="<%= item.stocksleft %>" value="1">
+                </td>
+                <td class="text-align-center formValign-mid border">
+                    <a class="btn btn-success" type="button" id="<%= item._id%>" disabled>Add to Cart</a>
                 </td>
             </tr>
             <% }); %>
@@ -83,8 +88,9 @@
 
 
 
-
-
+        <div class="cotnainer position-static d-grid" style="margin-left: 35%; margin-right: 35%;">
+            <a href="#top" class="btn btn-secondary" type="button" disabled>Go Back to Top</a>
+        </div>
 
     </main>
 
@@ -96,7 +102,9 @@
 
     <script>
         // INSERT SCRIPT HERE
-
+        var scrollTop = function() {
+            window.scrollTo(0, 0);
+        };
 
 
 

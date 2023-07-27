@@ -140,7 +140,7 @@ app.get('/about', async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 });
-app.get('/dashboard-admin', async (req, res) => {
+app.get('/shop-dashboard', async (req, res) => {
   try {
     const client = await MongoClient.connect(uri, options);
     const db = client.db();
@@ -150,7 +150,7 @@ app.get('/dashboard-admin', async (req, res) => {
     const data = await collection.find({}).toArray();
 
     // Render the EJS template and pass the data
-    res.render('dashboard-admin', { data });
+    res.render('shop-dashboard', { data });
 
     // Remember to close the MongoDB connection
     client.close();
