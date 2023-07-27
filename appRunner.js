@@ -8,9 +8,10 @@ const port = 3000;
 
 app.use(express.static(path.join(__dirname, 'public')));
 // import img
+
 app.use('/img', express.static(path.join(__dirname, 'public/img')));
 
-const uri = 'mongodb://127.0.0.1:27017/OnsiteActivities';
+const uri = 'mongodb://127.0.0.1:27017/';
 const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
