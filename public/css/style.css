@@ -1,7 +1,7 @@
 body{
     font-family: 'Poppins', sans-serif; 
-    background-image: ;
 }
+
 .navbar-brand{
     /* center */
     position: absolute;
@@ -10,7 +10,7 @@ body{
 }
 footer{
     color: white;
-    position: absolute;
+    position: relative;
     bottom: 0;
     width: 100%;
     text-align: center;
@@ -28,10 +28,67 @@ main{
     /* color: red; */
 }
 
+.shopItemLabel{
+    font-size: medium;
+    font-weight: bold;
+    color: #320a8f;
+    text-align: left;
+}
+.shopTableLabel{
+    font-size: 20px;
+    font-weight: bold;
+    color: #320a8f;
+    text-align: center;
+}
+.shopTableItem{
+    text-align: center;
+    padding: 10px;
+}
 
 .img-thumb{
     width: 100%;
     height: 100%;
-    max-height: 200px;
+    max-width: 300px;
+    max-height: 150px;
     object-fit: scale-down;
+}
+
+
+
+
+/*text fonts h1-h5 and p*/ 
+h1{
+    color: rgb(3, 102, 21);
+    font-family: arial;
+    font-size: 50px;
+}
+
+h2{
+    color: rgb(13, 200, 159);
+    font-family: arial;
+    font-size: 40px;
+}
+
+h3{
+    color: rgb(3, 118, 58);
+    font-family: arial;
+    font-size: 30px;
+}
+
+h4{
+    color: rgb(31, 165, 75);
+    font-family: arial;
+    font-size: 20px;
+}
+
+h5{
+    color: rgb(12, 128, 43);
+    font-family: arial;
+    font-size: 10px;
+}
+
+p{
+    color: rgb(1, 40, 12);
+    font-family: arial;
+    
 }

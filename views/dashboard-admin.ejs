@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <!-- IMPORT STYLE.CSS -->
     <link rel="stylesheet" type="text/css" href="/public/css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 
     <!-- IMPORT BOOTSTRAP -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,47 +24,53 @@
         <div class="row">
             <table class="nav-link">
                 <tr>
-                    <td class="px-3"><a class="nav-link" href="#">Home</a></td>
-                    <td class="px-3"><a class="nav-link" href="#">Shop</a></td>
-                    <td class="px-3"><a class="nav-link" href="#">My Cart</a></td>
-                    <td class="px-3"><a class="nav-link" href="#">My Account</a></td>
+                    <td class="px-3"><a class="nav-link" href="/">Home</a></td>
+                    <td class="px-3"><a class="nav-link" href="/shop">Shop</a></td>
+                    <td class="px-3"><a class="nav-link" href="/mycart">My Cart</a></td>
+                    <td class="px-3"><a class="nav-link" href="/myaccount">My Account</a></td>
                 </tr>
             </table>
         </div> 
     </nav>
 
     <main>
-        <!-- INSERT CONTENT HERE -->
-
-        <div>
-            <h1>
-                Items Available
-            </h1>
-            
-            <div>
-                <table id="shopFilter" hidden>
-                    <td>Filter by:</td>
-                </table>
-            </div>
-        </div>
-
-        
-        <div id="itemContainer">
-            <div class="col d-flex align-items-stretch pt-4">
-                <div class="card">
-                    <div class="card-body">
-                        <img id="shopItemThumb" src="img/HGGundamRose.webp" class="card-img-top img-fluid" alt="...">
-                        <div class="card-content">
-                            <div class="card-title text-center">HG GUNDAM ROSE</div>
-                            <div class="card-subtitle text-center">₱ 1300.00</div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <a href="#" class="btn btn-primary d-flex justify-content-center" onclick="addToCart('HG GUNDAM ROSE',1300)">Add to Cart</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <h1>Shop Dashboard</h1>
+        <table class="table table-striped">
+            <thead>
+                <th class="shopTableLabel">Item Name</th>
+                <th class="shopTableLabel">Price</th>
+                <th class="shopTableLabel">Update Status</th>
+                <th class="shopTableLabel">Image</th>
+                <th class="shopTableLabel">Remove Item</th>
+                <th class="shopTableLabel">Update Item</th>
+            </thead>
+            <tbody>
+                <% data.forEach((item) => { %>
+                <tr class="shopTableItem">
+                    <!-- <td class="shopItemLabel"><%= item.title %></td> -->
+                    <td><input type="text" placeholder="<%= item.title %>"></td>
+                    <td class="text-align-center minWidth-50" id="">
+                         ₱ <%= item.price %>
+                    </td>
+                    <td class="text-align-center minWidth-50">
+                        <%= item.availability %>
+                    </td>
+                    <td class="text-align-center minWidth-50">
+                        <img src="<%= item.imageLink %>" alt="<%= item.title%>" class="img-thumb">
+                    </td>
+                    <td>
+                        <a class="btn btn-success" type="button" id="<%= item._id%>">Add </a>
+                    </td>
+                    <td>
+                        <a class="btn btn-success" type="button" id="<%= item._id%>">Remove</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-success" type="button" id="<%= item._id%>">Add to Cart</a>
+                    </td>
+                </tr>
+                <% }); %>
+            </tbody>
+            </table>
 
 
 
