@@ -42,7 +42,7 @@ font-variation-settings:
         <div class="row">
             <table class="nav-link">
                 <tr>
-                    <td class="px-3"><a class="nav-link" href="/">Home</a></td>
+                    <td class="px-3"><a class="nav-link" href="/home">Home</a></td>
                     <td class="px-3"><a class="nav-link" href="/shop">Shop</a></td>
                     <td class="px-3"><a class="nav-link" href="/mycart">My Cart</a></td>
                     <td class="px-3"><a class="nav-link" href="/myaccount">My Account</a></td>
@@ -79,38 +79,42 @@ font-variation-settings:
             <th class="shopTableLabel border">Order</th>
         </thead>
         <tbody class="border">
-            <% data.forEach((item) => { %>
+            <% shopItems.forEach((item) => { %>
             <tr class="shopTableItem">
-                <!-- TITLE -->
-                <td class="shopItemLabel border">
-                    <%= item.title %>
-                </td>
-                <!-- PRICE -->
-                <td class="text-align-center minWidth-50 border" id="">
-                     ₱ <%= item.price %>
-                </td>
-                <!-- AVAILABILITY -->
-                <td class="text-align-center minWidth-50 border">
-                    <%= item.availability %>
-                </td>
+                <form id="<%= item.title %>">
+                    <!-- TITLE -->
+                    <td class="shopItemLabel border">
+                        <%= item.title %>
+                    </td>
+                    <!-- PRICE -->
+                    <td class="text-align-center minWidth-50 border" id="">
+                        ₱ <%= item.price %>
+                    </td>
+                    <!-- AVAILABILITY -->
+                    <td class="text-align-center minWidth-50 border">
+                        <%= item.availability %>
+                    </td>
 
-                <!-- IMAGE -->
-                <td class="text-align-center minWidth-50 border">
-                    <img src="<%= item.imageLink %>" alt="<%= item.title%>" class="img-thumb">
-                </td>
+                    <!-- IMAGE -->
+                    <td class="text-align-center minWidth-50 border">
+                        <img src="<%= item.imageLink %>" alt="<%= item.title%>" class="img-thumb">
+                    </td>
 
-                <!-- QUANTITY -->
-                <td class="text-align-center formValign-mid border">
-                    <input type="number" class="form-control " id="quantity" name="quantity" min="0" max="<%= item.stocksleft %>" value="" <%= item.shopAvailabilityShow%>>
-                </td>
+                    <!-- QUANTITY -->
+                    <td class="text-align-center formValign-mid border">
+                        <input type="number" class="form-control " id="quantity" name="quantity" min="0" max="<%= item.stocksleft %>" value="" <%= item.shopAvailabilityShow%>>
+                    </td>
 
-                <!-- CHECKOUT BUTTON -->
-                <td class="text-align-center formValign-mid border">
-                    <a class="btn btn-success <%= item.shopAvailabilityShow%>" type="button" id="<%= item._id%>" >
-                        <span class="material-symbols-outlined">shopping_cart_checkout</span>
-                    </a>
-                    <!-- CHANGE TO ID -->
-                </td>
+                    <!-- CHECKOUT BUTTON -->
+                    <td class="text-align-center formValign-mid border">
+                        <a class="btn btn-success checkout-btn <%= item.shopAvailabilityShow %>" type="button"
+                            data-item-id="<%= item._id %>" data-item-title="<%= item.title %>"
+                            data-item-price="<%= item.price %>" data-item-stocksleft="<%= item.stocksleft %>"
+                            onclick="checkoutItem(event)">
+                            <span class="material-symbols-outlined">shopping_cart_checkout</span>
+                        </a>
+                    </td>
+                </form>
             </tr>
             <% }); %>
         </tbody>
@@ -135,9 +139,32 @@ font-variation-settings:
         var scrollTop = function() {
             window.scrollTo(0, 0);
         };
-
-
-
+        
+        function checkoutItem(itemId, quantity) {
+        // Send a request to the server to checkout the item
+        fetch(`/checkout/${itemId}?quantity=${quantity}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+        })
+        .then(response => response.json())
+        .then(data => {
+        // Handle the response from the server
+        if (data.success) {
+            alert('Item successfully checked out!');
+            // You may redirect the user to a success page or perform any other action here.
+        } else {
+            alert('Checkout failed. Please try again later.');
+        }
+        })
+        .catch(error => {
+        console.error('Error during checkout:', error);
+        alert('An error occurred during checkout.');
+        });
+    }
+        
+    
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>

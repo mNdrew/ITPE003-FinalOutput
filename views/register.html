@@ -42,7 +42,7 @@
         <div class="row">
             <table class="nav-link">
                 <tr>
-                    <td class="px-3"><a class="nav-link" href="/">Home</a></td>
+                    <td class="px-3"><a class="nav-link" href="/home">Home</a></td>
                     <td class="px-3"><a class="nav-link" href="/shop">Shop</a></td>
                     <td class="px-3"><a class="nav-link" href="/mycart">My Cart</a></td>
                     <td class="px-3"><a class="nav-link" href="/myaccount">My Account</a></td>
@@ -66,31 +66,27 @@
                 </div>
               </div>
             
-  
-              <div class="row">
-                <label for="userid">Username</label>
-                <input  class="form-control" type="text" id="userid" name="userid" required placeholder="Input Usernmame">
-              </div>
-              <div class="row">
-                <label for="userpass">Password</label>
-                <input  class="form-control" type="password" id="userpass" name="userpass" required placeholder="Type your Password">
-              </div>
-
-              <!-- create div to catch of retyped passwords do not match -->
-              <div class="row">
-                <span id="passwordMatchStat"></span>
-              </div>
-
-              <div class="row">
-                <div class="col">
-                  <input class="checkbox" type="checkbox" onclick="showPassword()"><span>Show Password</span>
+              <form id="createAccountForm">
+                <div class="row">
+                  <label for="username">Username</label>
+                  <input  class="form-control" type="text" id="username" name="username" required placeholder="Input Usernmame">
                 </div>
-              </div>
-  
-              <div class="row d-grid">
-                <button type="button" class="btn btn-info" id="signupBtn">Sign-Up</button>
-              </div>
-  
+                <div class="row">
+                  <label for="userpass">Password</label>
+                  <input  class="form-control" type="password" id="userpass" name="userpass" required placeholder="Type your Password">
+                </div>
+              </form>
+
+
+                <div class="row">
+                  <div class="col">
+                    <input class="checkbox" type="checkbox" onclick="showPassword()"><span>Show Password</span>
+                  </div>
+                </div>
+    
+                <div class="row d-grid">
+                  <button type="button" class="btn btn-info" id="signupBtn" onclick="registerNewAccount()">Sign-Up</button>
+                </div>
               <div class="justify-content-center text-center pt-2">
                 <div class="row">
                   <a href="/login-user" class="txt-reset txt-subtle">Login Instead</a>
@@ -133,55 +129,50 @@
         
 
         function verifyFields(){
-          let uname = document.getElementById("userid").value;
+          console.log("Verifying Fields");
+          let uname = document.getElementById("username").value;
           let upass = document.getElementById("userpass").value;
-          let upassCheck = document.getElementById("userPassCheck").value;
 
-          if (uname == "" || upass == "" || upassCheck == ""){
+          if (uname == "" || upass == ""){
             alert("Please fill out all fields");
+            consol.log("Please fill out all fields");
             return false;
           }
           else {
             return true;
+            console.log(upname, upass);
           }
         }
+      
+      function resetFields(){
+        document.getElementById("username").value = "";
+        document.getElementById("userpass").value = "";
+      }
 
-        function signUp(){
-          if (verifyFields){
-            if (upass == upassCheck){
-              alert("Sign-up successful");
-            }
-            else {
-              alert("Passwords do not match");
-            }
-          }
-        }
+      async function registerNewAccount(){
+        console.log("Button Clicked");
+        if (verifyFields()) {
+            const formData = new FormData(document.getElementById("createAccountForm"));
+            const data = Object.fromEntries(formData.entries());
+            let uname = document.getElementById("username").value;
+            let upass = document.getElementById("userpass").value;
+            console.log("Data:", data);
+            console.log(uname, upass);
+          // PASS DATA FROM OBJECT COLLECTED AND TRIGGER /DBcreateAccountForm
+          const response = await fetch('/newAccountRegister', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+          });
 
-
-        //try
-        document.getElementById('signupBtn').addEventListener('click', async () => {
-        const username = document.getElementById('userid').value;
-        const password = document.getElementById('userpass').value;
-
-        const response = await fetch('/signup', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ username, password }),
-        });
-
-        const data = await response.json();
-        if (response.ok) {
-          // Redirect to the dashboard or show a success message
-          alert(data.message);
+          resetFields();
         } else {
-          alert(data.error);
+          return;
         }
-      });
-
-
-
+        
+      }
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
