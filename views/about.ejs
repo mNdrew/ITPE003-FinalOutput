@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Log In</title>
+    <title>Hobby Lobby | About Page</title>
     <meta charset="utf-8">
     <!-- IMPORT STYLE.CSS -->
     <link rel="stylesheet" type="text/css" href="/public/css/style.css">
@@ -23,6 +23,35 @@
     font-family: 'Arial', 'Helvetica', sans-serif;
     font-family: 'Poppins', sans-serif;
   }
+  #whatIsGundam{
+    background-image: url("/img/bgs/Bandai-PG-Phenex-2.webp") ;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: multiply;
+    /* filter:blur(10px); */
+    /* filter: grayscale(100%);  */
+    background-color: rgb(47, 48, 2);
+    color: white;
+  }
+  #specHeader{
+    /* gold header */
+    color: rgb(255, 215, 0);
+    text-shadow: rgb(210, 212, 58) 1px 0 10px;
+    font-weight: bold;
+  }
+  h2{
+    color: rgb(21, 42, 235);
+    /* ADD GLOW */
+    text-shadow: rgb(69, 39, 206) 1px 0 10px;
+    font-weight: bold;
+  }
+  h3{
+    color: rgb(106, 120, 243);
+    /* ADD GLOW */
+    text-shadow: rgb(172, 156, 245) 1px 0 10px;
+    font-weight: bold;
+    font-style: italic;
+  }
 </style>
 <body class="">
     <nav class="navbar d-flex justify-content-center text-center bg-dark text-light" disable hidden>
@@ -42,64 +71,122 @@
             </table>
         </div> 
     </nav>
-
-    <main class="justify-content-center">
-
-
-        <!-- INSERT CONTENT HERE -->    
- 
-<div class = "about_us">
-        <div class="color-about"> About Us  
+    <section>
+        <div class="container-fluid px-5 py-4 bg-dark text-light" >
+            <div class="row">
+                <div class="col centerItems">
+                    <!-- COL LEFT -->
+                    <!-- insert image icon -->
+                    <img src="https://i.imgur.com/4QZK2VH.png" alt="logo" width="200" height="200">
+                </div>
+                <div class="col centerItems">
+                    <!-- COL RIGHT -->
+                    <div class="container">
+                    <h1 class="text-start" id="specHeader">About Us</h1>
+                    <p class="text-start">
+                    At Hobby Lobby we are passionate about bringing the thrilling world of Gundam to life for fans, collectors, and hobbyists alike. As dedicated enthusiasts ourselves, we understand the joy and excitement that these iconic mechs bring to people of all ages. Our mission is to provide the best Gundam products and services to meet the needs of every Gundam enthusiast out there.
+                    </p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="color-about1"> at Hobby Lobby
-            we are passionate about bringing the thrilling world of Gundam to life for fans, collectors, and hobbyists alike. As dedicated enthusiasts ourselves, we understand the joy and excitement that these iconic mechs bring to people of all ages. Our mission is to provide the best Gundam products and services to meet the needs of every Gundam enthusiast out there.
-        </div>
-    
-    
+    </section>
 
-    
-    <div class = "about_con1">
-        <div class="color-about"> What is Gundam? 
+    <section id="itemsForSale" class="px-5 py-4" >
+        <h2 class="mb-3">Featured Products</h2>
+        <div class="row">
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card">
+                    <img src="/img/items//HG_Gundam_Lfrith.webp" alt="Product 1" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">Product 1</h5>
+                        <p class="card-text">Product description and details.</p>
+                        <button class="btn btn-danger">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card">
+                    <img src="/img/items//HG_Gundam_Lfrith.webp" alt="Product 2" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">Product 2</h5>
+                        <p class="card-text">Product description and details.</p>
+                        <button class="btn btn-danger">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card">
+                    <img src="/img/items//HG_Gundam_Lfrith.webp" alt="Product 2" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">Product 2</h5>
+                        <p class="card-text">Product description and details.</p>
+                        <button class="btn btn-danger">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Add more products as needed -->
         </div>
-        <div class="color-h1">  </t> Gundam is a popular and long-running franchise of Japanese animated series (anime) and related media, centered around giant mecha robots called "Mobile Suits." The franchise was created by Yoshiyuki Tomino and produced by Sunrise, a Japanese animation studio. The first series, titled "Mobile Suit Gundam," premiered in Japan in 1979.
+    </section>
+
+    <section class="px-5 py-4" id="whatIsGundam">
+        <div class="container"> 
+            <h1 id="specHeader">What is Gundam?</h1>
+        </div>
+        <div class="container">  </t> Gundam is a popular and long-running franchise of Japanese animated series (anime) and related media, centered around giant mecha robots called "Mobile Suits." The franchise was created by Yoshiyuki Tomino and produced by Sunrise, a Japanese animation studio. The first series, titled "Mobile Suit Gundam," premiered in Japan in 1979.
         </div>   
-        <div class="color-h2">Key elements of the Gundam franchise include:
-        </div>        
-        <div class="color-h3"> 
-        Mobile Suits:</div> <div class="color-h4"> These are humanoid, giant robots piloted by humans. They are often equipped with various weapons and advanced technology, and they play a central role in the series' battles and conflicts.
-        </div>
-        <div class="color-h3"> 
-        War and Conflict: </div> <div class="color-h4">Gundam series typically take place in the context of interstellar wars and political struggles. The storylines often explore the human cost of war, the consequences of violence, and themes of sacrifice and heroism.
-        </div>
-        <div class="color-h3"> 
-        Universal Century Timeline: </div> <div class="color-h4">The Gundam franchise is divided into different timelines, with the Universal Century (UC) being the original and most iconic timeline. It encompasses many series and movies set in the same universe, with some of the most famous entries being "Mobile Suit Gundam," "Mobile Suit Zeta Gundam," "Mobile Suit Gundam: Char's Counterattack," and others.
-        </div>
-        <div class="color-h3"> 
-        Alternate Universes: </div> <div class="color-h4">In addition to the Universal Century timeline, the Gundam franchise has expanded into various alternate universes, each with its own unique setting and characters. Some of these alternate universes include Gundam Wing, Gundam SEED, Gundam 00, Gundam Iron-Blooded Orphans, and many more.
-        </div>
-        <div class="color-h3"> 
-        Newtypes: </div> <div class="color-h4">The concept of "Newtypes" is significant in many Gundam series. Newtypes are humans with heightened psychic abilities and increased empathy, often considered the next stage of human evolution. They play a crucial role in shaping the narrative and themes of the series.
-        </div>
-        <div class="color-h3"> 
-        Legacy and Influence: </div> <div class="color-h4">Gundam has had a massive impact on the anime and mecha genre, becoming one of the most influential franchises in Japanese pop culture. It has inspired numerous spin-offs, movies, video games, model kits (Gunpla), and merchandise.
-         </div>
-     </div>  
+    
+        <div id="aboutGundam" class="container py-4">
+            <h2 id="specHeader">
+                Key elements of the Gundam franchise include:
+            </h2>    
+            <h3 class=""> 
+                Mobile Suits:
+            </h3> 
+            <div class="">
+                These are humanoid, giant robots piloted by humans. They are often equipped with various weapons and advanced technology, and they play a central role in the series' battles and conflicts.
+            </div>
+            <h3 class=""> 
+            War and Conflict: 
+            </h3> 
+            <div class="">
+                Gundam series typically take place in the context of interstellar wars and political struggles. The storylines often explore the human cost of war, the consequences of violence, and themes of sacrifice and heroism.
+            </div>
+            <h3 class=""> 
+                Universal Century Timeline:
+            </h3> 
+            <div class="">
+                The Gundam franchise is divided into different timelines, with the Universal Century (UC) being the original and most iconic timeline. It encompasses many series and movies set in the same universe, with some of the most famous entries being "Mobile Suit Gundam," "Mobile Suit Zeta Gundam," "Mobile Suit Gundam: Char's Counterattack," and others.
+            </div>
+            <h3 class=""> 
+                Alternate Universes: 
+            </h3> 
+            <div class="">
+                In addition to the Universal Century timeline, the Gundam franchise has expanded into various alternate universes, each with its own unique setting and characters. Some of these alternate universes include Gundam Wing, Gundam SEED, Gundam 00, Gundam Iron-Blooded Orphans, and many more.
+            </div>
+            <h3 class=""> 
+                Newtypes: 
+            </h3> 
+            <div class="">
+                The concept of "Newtypes" is significant in many Gundam series. Newtypes are humans with heightened psychic abilities and increased empathy, often considered the next stage of human evolution. They play a crucial role in shaping the narrative and themes of the series.
+            </div>
+            <div class=""> 
+                Legacy and Influence: 
+            </div> 
+            <div class="">
+                Gundam has had a massive impact on the anime and mecha genre, becoming one of the most influential franchises in Japanese pop culture. It has inspired numerous spin-offs, movies, video games, model kits (Gunpla), and merchandise.
+            </div>
 
-     <div class = "about_con2">
-        <div class="color-h5"> 
-        The Gundam franchise continues to evolve, with new series and projects being released periodically. If you're interested in exploring Gundam, there are many entry points depending on your preferences for timelines and themes!
+            <div class=""> 
+                The Gundam franchise continues to evolve, with new series and projects being released periodically. If you're interested in exploring Gundam, there are many entry points depending on your preferences for timelines and themes!
+            </div>
         </div>
-    </div>
 
-      
-</div>
-
-
-    </main>
-
+        </div>
+    </section>
     <footer>
         <div class="container-fluid bg-dark text-light text-center py-3">
-            <p>ShopName - Cayetano, Guinto, Rosete, Velasco, Velasquez</p>
+            <p>Hobby Lobby - Cayetano, Guinto, Rosete, Velasco, Velasquez</p>
         </div>
     </footer>
     <script>

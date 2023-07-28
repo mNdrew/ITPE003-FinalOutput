@@ -1,7 +1,7 @@
 {
   "name": "itpe003-finaloutput",
   "version": "1.0.0",
-  "description": "",
+  "description": "MS Sea is a Student Event Management System for DLSU-D   \r  # Pages   \r 1. Home Page   \r     1. Events happening Now and Soon   \r 2. 📃 Login page   \r     1. Default Login (Standard User/Student)   \r         1. Input Username   \r         2. Input Password   \r         3. Login CTA   \r     2. Forgot Password   \r     3. Login as Administrator   \r         1. Input Username   \r         2. Input Password   \r         3. Login CTA   \r 3. 📃 Events    \r     1. Events Happening   \r     2. Events Soon   \r     3. Signed Events   \r 4. 📃 User Profile Page   \r     1. Display:   \r         - Name   \r         - Information   \r         - 📃 Edit Account information CTA   \r     2. Display My Events   \r     3. Display Event Badge   \r 5. Admin Dashboard   \r     1. Display Events   \r         1. Display Attendees for the Events   \r         2. Manage Attendance of Users   \r 6. 📃About Page   \r 7. 📃PAGE 404",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,8 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
     "mongodb": "^5.7.0"
-  }
+  },
+  "devDependencies": {}
 }

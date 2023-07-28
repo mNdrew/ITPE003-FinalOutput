@@ -3,6 +3,9 @@ body{
     /* font-family: 'Inter', sans-serif; */
     font-family: 'Poppins', sans-serif;
 }
+h1{
+    font-weight: bold;
+}
 
 .navbar-brand{
     /* center */
@@ -38,123 +41,7 @@ main{
 
 
 /*-----------about css-----------*/ 
-.column {
-    float: left;
-    width: 50%;
-    padding: 10px;
-    height: 300px; /* Should be removed. Only for demonstration */
-  }
-  
-  /* Clear floats after the columns */
-  .row:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-  
-.about_bg
-{
-    background-color: black;
-    
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    
-}
 
-
-.about_us
-{
-    align-items: center;
-    border-radius: 0%;
-    border-style: hidden;
-    background-image: url('https://wallpaperaccess.com/full/2881167.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-
-}
-
-
-.about_con1
-{
-    align-items: center;
-    border-radius: 0%;
-    border-style: hidden;
-    padding-left: 1px;
-    padding-right: 1px;
-}
-
-
-.about_con2
-{
-    align-items: center;
-    border-radius: 0%;
-    border-style: hidden;
-
-}
-
-.color-about{
-    color: rgb(255, 255, 255);
-    font-family: 'lumanosimo';
-    font-size: 25px;
-    text-align: center;
-}
-
-.color-about1{
-    color: rgba(9, 200, 168, 0.795);
-    font-family:'Times New Roman', Times, serif;
-    font-size: 18px;
-    text-align: center;
-}
-
-
-.color-h1{
-    color: rgb(53, 250, 53);
-    font-family: arial;
-    font-size: 15px;
-    text-align: center;
-    padding-left: 5%;
-    padding-right: 5%;
-}
-.color-h2{
-    color: rgb(204, 255, 0);
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 15px;  
-    
-    padding-left: 5%;
-    padding-right: 5%;  
-    
-}
-.color-h3{
-    color: rgb(215, 20, 20);
-    font-family: arial;
-    font-size: 14px;
-    text-align: center;
-    
-    padding-left: 5%;
-    padding-right: 5%;
-}
-.color-h4{
-    color:rgb(255, 255, 255);
-    font-family: arial;
-    font-size: 13px;
-    
-    padding-left: 5%;
-    padding-right: 5%;
-    
-}
-
-.color-h5{
-
-    color:rgb(189, 196, 11);
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 13px;
-    text-align: center;
-    
-    padding-left: 5%;
-    padding-right: 5%;
-}
 
 /*----*/
 
@@ -187,19 +74,30 @@ main{
 }
 
 #img-dev-thumb{
-    width: 200px;
-    height: 200px;
+    /* width: 200px;
+    height: 200px; */
+    min-height: 200px;
+   max-height: 200px;
+    /* object-fit: crop; */
     object-fit: cover;
     
 }
-#img-dev-cont{
-  width: 200px;
-  height: 200px;
-  object-fit: cover;
-
- 
-
+#img-dev-container{
+    object-fit: cover;
+    min-height: 200px;
+    max-height: 200px;
+    justify-content: center;
+    align-items: center;
 }
+
+ #img-dev-cont{
+    /* CREATE HEIGHT THAT ADOPTS BASED ON PARENT */
+    height: 100%; 
+    width: 100%;
+    object-fit: cover;
+    object-fit: scale-down;
+    min-height: auto;
+} 
 
 
 .text-white{
@@ -239,6 +137,10 @@ main{
 #logincard{
     max-width: 400px;
 }
+#registercard{
+    max-width: 400px;
+    ;
+}
 
 body {
     background-color: #f8f9fa;
@@ -271,6 +173,7 @@ body {
     font-weight: bold;
     text-align: center;
     margin-bottom: 10px;
+    
   }
   .sub-header-text {
     font-size: 16px;

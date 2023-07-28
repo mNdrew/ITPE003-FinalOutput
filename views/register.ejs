@@ -1,0 +1,190 @@
+<html>
+<head>
+    <title>Hobby Lobby | Register Account</title>
+    <meta charset="utf-8">
+    <!-- IMPORT STYLE.CSS -->
+    <link rel="stylesheet" type="text/css" href="/public/css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+
+    <!-- IMPORT BOOTSTRAP -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    
+    <!-- GOOGLE FONTS Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins&display=swap" rel="stylesheet">
+
+</head>
+<style>
+  body{
+    font-family: 'Inter', sans-serif;
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    font-family: 'Poppins', sans-serif;
+
+    background-image: url("/img/bgs/aerial-bg.jpg");
+    /* background-image: url("/img/bgs/unicorn-bg.jpg"); */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: overlay;
+    /* filter: grayscale(100%);  */
+    /* background-color: rgb(85, 19, 19); */
+    background-color: rgb(34, 76, 139);
+    
+  }
+</style>
+<body class="bg-info">
+    <nav class="navbar d-flex justify-content-center text-center bg-dark text-light" disable hidden>
+        <div class="container-fluid py-3">
+          <a class="navbar-brand text-center text-light" href="/shop">Hobby Lobby</a>
+        </div>
+        <div class="row">
+            <table class="nav-link">
+                <tr>
+                    <td class="px-3"><a class="nav-link" href="/">Home</a></td>
+                    <td class="px-3"><a class="nav-link" href="/shop">Shop</a></td>
+                    <td class="px-3"><a class="nav-link" href="/mycart">My Cart</a></td>
+                    <td class="px-3"><a class="nav-link" href="/myaccount">My Account</a></td>
+                    <td class="px-3"><a class="nav-link" href="/about">About</a></td>
+                    <td class="px-3"><a class="nav-link" href="/contact">Contact Us</a></td>
+                </tr>
+            </table>
+        </div> 
+    </nav>
+
+    <main class="container container-fluid" >
+        <!-- INSERT CONTENT HERE -->
+        <div class="card container-fluid" id="registercard">
+          <div class="card-body">
+  
+            <div class="form-group">
+              <div class="centerItems">
+                <h1>Welcome to Hobby Lobby</h1>
+                <div class="container">
+                  <span class="badge text-bg-info">Member Sign-up</span>
+                </div>
+              </div>
+            
+  
+              <div class="row">
+                <label for="userid">Username</label>
+                <input  class="form-control" type="text" id="userid" name="userid" required placeholder="Input Usernmame">
+              </div>
+              <div class="row">
+                <label for="userpass">Password</label>
+                <input  class="form-control" type="password" id="userpass" name="userpass" required placeholder="Type your Password">
+              </div>
+
+              <!-- create div to catch of retyped passwords do not match -->
+              <div class="row">
+                <span id="passwordMatchStat"></span>
+              </div>
+
+              <div class="row">
+                <div class="col">
+                  <input class="checkbox" type="checkbox" onclick="showPassword()"><span>Show Password</span>
+                </div>
+              </div>
+  
+              <div class="row d-grid">
+                <button type="button" class="btn btn-info" id="signupBtn">Sign-Up</button>
+              </div>
+  
+              <div class="justify-content-center text-center pt-2">
+                <div class="row">
+                  <a href="/login-user" class="txt-reset txt-subtle">Login Instead</a>
+                </div>
+                <div class="row" hidden>
+                  <a href="/" class="txt-reset txt-subtle">Create New Account</a>
+                </div>
+              </div>
+  
+            </div>
+          </div>
+        </div>
+        
+              
+
+
+
+
+
+
+    </main>
+
+    <footer>
+        <div class="container-fluid bg-dark text-light text-center py-3">
+            <p>ShopName - Cayetano, Guinto, Rosete, Velasco, Velasquez</p>
+        </div>
+    </footer>
+
+    <script>
+        // TOGGLE PASSWORD SCRIPT
+        function showPassword(){
+          let pass = document.getElementById("userpass");
+          if (pass.type === "password"){
+            pass.type = "text";
+          }
+          else {
+            pass.type = "password";
+          }
+        }
+        
+
+        function verifyFields(){
+          let uname = document.getElementById("userid").value;
+          let upass = document.getElementById("userpass").value;
+          let upassCheck = document.getElementById("userPassCheck").value;
+
+          if (uname == "" || upass == "" || upassCheck == ""){
+            alert("Please fill out all fields");
+            return false;
+          }
+          else {
+            return true;
+          }
+        }
+
+        function signUp(){
+          if (verifyFields){
+            if (upass == upassCheck){
+              alert("Sign-up successful");
+            }
+            else {
+              alert("Passwords do not match");
+            }
+          }
+        }
+
+
+        //try
+        document.getElementById('signupBtn').addEventListener('click', async () => {
+        const username = document.getElementById('userid').value;
+        const password = document.getElementById('userpass').value;
+
+        const response = await fetch('/signup', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ username, password }),
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+          // Redirect to the dashboard or show a success message
+          alert(data.message);
+        } else {
+          alert(data.error);
+        }
+      });
+
+
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -20,10 +20,12 @@
 
     /* Custom styles for the cart icon */
     .fas.fa-shopping-cart {
-      margin-right: 5px;
+      margin-right: 4px;
+      
     }
+
     .material-symbols-outlined {
-      max-height: 10px;
+      max-height: 4px;
       font-variation-settings:
       'FILL' 0,
       'wght' 400,
@@ -33,16 +35,23 @@
   </style>
 </head>
 <body>
-  <button onclick="addToCart()">
+  <button onclick="addToCart()" id="cartButton">
     <i class="fas fa-shopping-cart"></i> <span class="material-symbols-outlined">
       shopping_cart_checkout
-      </span> Cart
+      </span>
   </button>
 
   <script>
     function addToCart() {
-      const button = document.querySelector('button');
-      button.innerHTML = '<i class="fas fa-shopping-cart"></i> <span class="material-symbols-outlined"> shopping_cart_checkout</span> Added to cart';
+      const button = document.getElementById('cartButton');
+      const cartIcon = button.querySelector('.fas.fa-shopping-cart');
+      const cartText = button.querySelector('.material-symbols-outlined');
+
+      if (button.innerText.includes('Added to cart')) {
+        button.innerHTML = '<i class="fas fa-shopping-cart"></i> <span class="material-symbols-outlined">shopping_cart_checkout</span>';
+      } else {
+        button.innerHTML = '<i class="fas fa-check-circle"></i> Added to cart';
+      }
     }
   </script>
 </body>
