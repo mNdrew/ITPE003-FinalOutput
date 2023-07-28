@@ -6,18 +6,28 @@
     <link rel="stylesheet" type="text/css" href="/public/css/style.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 
+
     <!-- IMPORT BOOTSTRAP -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    
     <!-- GOOGLE FONTS Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins&display=swap" rel="stylesheet">
+
 </head>
-<body>
-    <nav class="navbar bg-body-tertiary d-flex justify-content-center text-center">
+<style>
+  body{
+    font-family: 'Inter', sans-serif;
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    font-family: 'Poppins', sans-serif;
+  }
+</style>
+<body class="">
+    <nav class="navbar d-flex justify-content-center text-center bg-dark text-light" disable hidden>
         <div class="container-fluid py-3">
-          <a class="navbar-brand text-center" href="/shop">ShopName</a>
+          <a class="navbar-brand text-center text-light" href="/shop">Hobby Lobby</a>
         </div>
         <div class="row">
             <table class="nav-link">
@@ -26,24 +36,73 @@
                     <td class="px-3"><a class="nav-link" href="/shop">Shop</a></td>
                     <td class="px-3"><a class="nav-link" href="/mycart">My Cart</a></td>
                     <td class="px-3"><a class="nav-link" href="/myaccount">My Account</a></td>
-                    <td class="px-3"><a class="nav-link" href="/about">About Us</a></td>
+                    <td class="px-3"><a class="nav-link" href="/about">About</a></td>
+                    <td class="px-3"><a class="nav-link" href="/contact">Contact Us</a></td>
                 </tr>
             </table>
         </div> 
     </nav>
 
-    <main>
-        <!-- INSERT CONTENT HERE -->
-        <h1>Welcome to ShopName</h1>
+    <main class="container mt-4">
+        <div class="jumbotron">
+            <h1 class="display-4">Welcome to the Hobby Lobby</h1>
+            <p class="lead">Discover a wide range of Gundam model kits, action figures, and accessories.</p>
+            <hr class="my-4">
+            <p>Explore our collection and find your favorite Gundam items today.</p>
+        </div>
 
-
-
-
+        <h2 class="mb-3">Featured Products</h2>
+        <div class="row">
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card">
+                    <img src="path_to_image" alt="Product 1" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">Product 1</h5>
+                        <p class="card-text">Product description and details.</p>
+                        <button class="btn btn-primary">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card">
+                    <img src="path_to_image" alt="Product 2" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">Product 2</h5>
+                        <p class="card-text">Product description and details.</p>
+                        <button class="btn btn-primary">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card">
+                    <img src="path_to_image" alt="Product 2" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">Product 2</h5>
+                        <p class="card-text">Product description and details.</p>
+                        <button class="btn btn-primary">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Add more products as needed -->
+        </div>
+        <h2 class="mb-3">Special Offer</h2>
+        <div class="row">
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card">
+                    <img src="path_to_image" alt="Product 1" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">Product 1</h5>
+                        <p class="card-text">Product description and details.</p>
+                        <button class="btn btn-primary">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
     <footer>
         <div class="container-fluid bg-dark text-light text-center py-3">
-            <p>ShopName - Cayetano, Guinto, Rosete, Velasco, Velasquez</p>
+            <p>Hobby Lobby - Cayetano, Guinto, Rosete, Velasco, Velasquez</p>
         </div>
     </footer>
 

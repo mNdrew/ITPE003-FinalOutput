@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart Icon Example</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-LZ5IKB44uPna+uR1OvC7J5RBnbsv67pPxykL/BybTdqhDapX7pLbgLW3nHwsOo/P45H4+7txOh2vUPJfjbmZw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+  <style>
+    /* Custom styles for the button */
+    button {
+      background-color: #3498db;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    /* Custom styles for the cart icon */
+    .fas.fa-shopping-cart {
+      margin-right: 5px;
+    }
+    .material-symbols-outlined {
+      max-height: 10px;
+      font-variation-settings:
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 48
+    }
+  </style>
+</head>
+<body>
+  <button onclick="addToCart()">
+    <i class="fas fa-shopping-cart"></i> <span class="material-symbols-outlined">
+      shopping_cart_checkout
+      </span> Cart
+  </button>
+
+  <script>
+    function addToCart() {
+      const button = document.querySelector('button');
+      button.innerHTML = '<i class="fas fa-shopping-cart"></i> <span class="material-symbols-outlined"> shopping_cart_checkout</span> Added to cart';
+    }
+  </script>
+</body>
+</html>

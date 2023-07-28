@@ -6,18 +6,37 @@
     <link rel="stylesheet" type="text/css" href="/public/css/style.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 
+
     <!-- IMPORT BOOTSTRAP -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    
     <!-- GOOGLE FONTS Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins&display=swap" rel="stylesheet">
+
 </head>
-<body>
-    <nav class="navbar bg-body-tertiary d-flex justify-content-center text-center">
+<style>
+  body{
+    font-family: 'Inter', sans-serif;
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    font-family: 'Poppins', sans-serif;
+    
+    background-image: url("/img/bgs/aerial-bg.jpg");
+    background-image: url("/img/bgs/unicorn-bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: overlay;
+    /* filter: grayscale(100%);  */
+    background-color: rgb(85, 19, 19);
+
+  }
+</style>
+<body class="">
+    <nav class="navbar d-flex justify-content-center text-center bg-dark text-light" disable hidden>
         <div class="container-fluid py-3">
-          <a class="navbar-brand text-center" href="/shop">ShopName</a>
+          <a class="navbar-brand text-center text-light" href="/shop">Hobby Lobby</a>
         </div>
         <div class="row">
             <table class="nav-link">
@@ -26,7 +45,8 @@
                     <td class="px-3"><a class="nav-link" href="/shop">Shop</a></td>
                     <td class="px-3"><a class="nav-link" href="/mycart">My Cart</a></td>
                     <td class="px-3"><a class="nav-link" href="/myaccount">My Account</a></td>
-                    <td class="px-3"><a class="nav-link" href="/about">About Us</a></td>
+                    <td class="px-3"><a class="nav-link" href="/about">About</a></td>
+                    <td class="px-3"><a class="nav-link" href="/contact">Contact Us</a></td>
                 </tr>
             </table>
         </div> 
@@ -34,7 +54,48 @@
 
     <main>
         <!-- INSERT CONTENT HERE -->
-
+        <div class="card container-fluid" id="logincard">
+            <div class="card-bo dy">
+    
+              <div class="form-group">
+                <div class="centerItems">
+                  <h1>Welcome to Hobby Lobby</h1>
+                  <div class="container">
+                    <span class="badge text-bg-danger">Admin Log-in</span>
+                  </div>
+                </div>
+              
+    
+                <div class="row">
+                  <label for="userid">Username</label>
+                  <input  class="form-control" type="text" id="userid" name="userid" required placeholder="Input Usernmame">
+                </div>
+                <div class="row">
+                  <label for="userpass">Password</label>
+                  <input  class="form-control" type="password" id="userpass" name="userpass" required placeholder="Type your Password">
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <input class="checkbox" type="checkbox" onclick="showPassword()"><span>Show Password</span>
+                  </div>
+                  <div class="col mw-100 text-end" disable hidden>
+                    <label><a href="" class="text-end">Forgot password?</a></label>
+                  </div>
+                </div>
+    
+                <div class="d-grid">
+                  <button type="button" class="btn btn-danger">Log in</button>
+                </div>
+    
+                <div class="justify-content-center text-center pt-2">
+                  <div class="row">
+                    <a href="/login-user" class="txt-reset txt-subtle">Login as User</a>
+                  </div>
+                </div>
+    
+              </div>
+            </div>
+          </div>
 
 
 
@@ -50,7 +111,15 @@
     </footer>
 
     <script>
-        // INSERT SCRIPT HERE
+        // TOGGLE PASSWORD SCRIPT
+        function showPassword() {
+          var x = document.getElementById("userpass");
+          if (x.type === "password") {
+            x.type = "text";
+          } else {
+            x.type = "password";
+          }
+        }
 
 
 

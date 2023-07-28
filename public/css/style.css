@@ -1,6 +1,7 @@
 body{
-    font-family: 'Poppins', sans-serif; 
     position: relative;
+    /* font-family: 'Inter', sans-serif; */
+    font-family: 'Poppins', sans-serif;
 }
 
 .navbar-brand{
@@ -20,16 +21,15 @@ footer{
     text-align: center;
 }
 nav{
-    background-color: #320a8f;
-    /* color: rgb(250, 245, 245); */
+    /* background-color: #320a8f; */
+    color: rgb(250, 245, 245);
 
 } 
-/* PST TULOG NA  */
 
 
 main{
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     padding-left: 10%;
     padding-right: 10%;
     min-height: 100%;
@@ -37,48 +37,126 @@ main{
 
 
 
-/*about css*/ 
+/*-----------about css-----------*/ 
+.column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    height: 300px; /* Should be removed. Only for demonstration */
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
 .about_bg
 {
     background-color: black;
-    background-image: url('https://wallpaperaccess.com/full/2793732.jpg');
+    
     background-repeat: no-repeat;
+    background-size: cover;
     background-position: center;
-   
-  
+    
 }
 
-.color-green1{
+
+.about_us
+{
+    align-items: center;
+    border-radius: 0%;
+    border-style: hidden;
+    background-image: url('https://wallpaperaccess.com/full/2881167.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+}
+
+
+.about_con1
+{
+    align-items: center;
+    border-radius: 0%;
+    border-style: hidden;
+    padding-left: 1px;
+    padding-right: 1px;
+}
+
+
+.about_con2
+{
+    align-items: center;
+    border-radius: 0%;
+    border-style: hidden;
+
+}
+
+.color-about{
+    color: rgb(255, 255, 255);
+    font-family: 'lumanosimo';
+    font-size: 25px;
+    text-align: center;
+}
+
+.color-about1{
+    color: rgba(9, 200, 168, 0.795);
+    font-family:'Times New Roman', Times, serif;
+    font-size: 18px;
+    text-align: center;
+}
+
+
+.color-h1{
     color: rgb(53, 250, 53);
     font-family: arial;
     font-size: 15px;
     text-align: center;
+    padding-left: 5%;
+    padding-right: 5%;
 }
-.color-yellow2{
-    color: rgb(208, 255, 0);
+.color-h2{
+    color: rgb(204, 255, 0);
     font-family: 'Times New Roman', Times, serif;
-    font-size: 20px;
-    text-align: center;
+    font-size: 15px;  
+    
+    padding-left: 5%;
+    padding-right: 5%;  
+    
 }
-.color-green3{
-    color: rgb(0, 255, 0);
+.color-h3{
+    color: rgb(215, 20, 20);
     font-family: arial;
-    font-size: 15px;
+    font-size: 14px;
+    text-align: center;
+    
+    padding-left: 5%;
+    padding-right: 5%;
 }
-.color-white1{
+.color-h4{
     color:rgb(255, 255, 255);
     font-family: arial;
     font-size: 13px;
+    
+    padding-left: 5%;
+    padding-right: 5%;
+    
 }
 
-.color-blue2{
-    color:rgb(5, 214, 246);
-    font-family: arial;
-    font-size: 15px;
+.color-h5{
+
+    color:rgb(189, 196, 11);
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 13px;
     text-align: center;
+    
+    padding-left: 5%;
+    padding-right: 5%;
 }
 
-
+/*----*/
 
 
 .shopItemLabel{
@@ -108,6 +186,22 @@ main{
     object-fit: scale-down;
 }
 
+#img-dev-thumb{
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    
+}
+#img-dev-cont{
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+
+ 
+
+}
+
+
 .text-white{
     color: white;
 }
@@ -115,3 +209,76 @@ main{
 .formValign-mid{
     vertical-align: middle;
 }
+.form-group{
+    /* margin-top: 40px;
+    padding: 20px;
+    margin-left: 10%;
+    margin-right: 10% ; */
+    flex-direction:column;
+    display: flex;
+    
+}
+.centerItems{
+    text-align: center;
+    justify-content: center;
+}
+.form-group label{
+  display: block;
+  padding: 5px;
+}
+/* .form-group input{
+  text-align: center;
+} */
+.form-group input[type="checkbox"]{
+  margin-top: 10px;
+  margin-bottom: 25px;
+  margin-right: 3px;
+}
+
+
+#logincard{
+    max-width: 400px;
+}
+
+body {
+    background-color: #f8f9fa;
+  }
+  .contact-container {
+    background-color: #ffffff;
+    margin-top: 50px;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+    padding-top: 40px;
+  }
+  .contact-container form {
+    text-align: center;
+  }
+  .contact-container .form-group {
+    margin-bottom: 15px;
+  }
+  .contact-container button {
+    margin-top: 15px;
+  }
+  .developer-card {
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+  .header-text {
+    margin-top: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  .sub-header-text {
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .txt-subtle{
+    font-size: 12px;
+    color: #6c757d;
+  }

@@ -140,6 +140,7 @@ app.get('/about', async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 });
+
 app.get('/shop-dashboard', async (req, res) => {
   try {
     const client = await MongoClient.connect(uri, options);
@@ -151,6 +152,66 @@ app.get('/shop-dashboard', async (req, res) => {
 
     // Render the EJS template and pass the data
     res.render('shop-dashboard', { data });
+
+    // Remember to close the MongoDB connection
+    client.close();
+  } catch (err) {
+    console.error('Error fetching data from MongoDB:', err);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+app.get('/login-user', async (req, res) => {
+  try {
+    const client = await MongoClient.connect(uri, options);
+    const db = client.db();
+    const collection = db.collection('shopItems');
+    
+    // Fetch data from MongoDB
+    const data = await collection.find({}).toArray();
+
+    // Render the EJS template and pass the data
+    res.render('login-user', { data });
+
+    // Remember to close the MongoDB connection
+    client.close();
+  } catch (err) {
+    console.error('Error fetching data from MongoDB:', err);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+app.get('/login-admin', async (req, res) => {
+  try {
+    const client = await MongoClient.connect(uri, options);
+    const db = client.db();
+    const collection = db.collection('shopItems');
+    
+    // Fetch data from MongoDB
+    const data = await collection.find({}).toArray();
+
+    // Render the EJS template and pass the data
+    res.render('login-admin', { data });
+
+    // Remember to close the MongoDB connection
+    client.close();
+  } catch (err) {
+    console.error('Error fetching data from MongoDB:', err);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+app.get('/contact', async (req, res) => {
+  try {
+    const client = await MongoClient.connect(uri, options);
+    const db = client.db();
+    const collection = db.collection('shopItems');
+    
+    // Fetch data from MongoDB
+    const data = await collection.find({}).toArray();
+
+    // Render the EJS template and pass the data
+    res.render('contactus', { data });
 
     // Remember to close the MongoDB connection
     client.close();
