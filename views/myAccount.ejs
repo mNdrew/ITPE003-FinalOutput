@@ -27,7 +27,7 @@
 <body class="">
     <nav class="navbar d-flex justify-content-center text-center bg-dark text-light" disable hidden>
         <div class="container-fluid py-3">
-          <a class="navbar-brand text-center text-light" href="/shop">Hobby Lobby</a>
+          <a class="navbar-brand text-center text-light myBrand" href="/shop">Hobby Lobby</a>
         </div>
         <div class="row">
             <table class="nav-link">
@@ -46,9 +46,17 @@
     <main>
         <!-- INSERT CONTENT HERE -->
         <h1>Account Profile</h1>
+        <h1>Welcome to your <% userInfo.item %>!</h1>
 
-        <a href="/login-user">User Login</a>
-        <a href="/login-admin">Admin Login</a>  
+        <div class="card text-start">
+          <img class="card-img-top" src="holder.js/100px180/" alt="Title">
+          <div class="card-body">
+            <h4 class="card-title">Title</h4>
+            <p class="card-text">Body</p>
+          </div>
+        </div>
+
+        <a href="/logout">Logout</a>
 
 
 
@@ -63,7 +71,21 @@
     <script>
         // INSERT SCRIPT HERE
 
+      async function logout(){
+        let response = await fetch('/logout', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+          },
+          body: JSON.stringify({})
+        });
 
+        let result = await response.json();
+        console.log(result);
+        if(result.success){
+          window.location.href = '/home';
+        }
+      }
 
 
     </script>

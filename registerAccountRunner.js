@@ -1,23 +1,35 @@
 const express = require('express');
-const {MongoClient, ObjectId } = require('mongodb');
-
+const { MongoClient, ObjectId } = require('mongodb');
 const cors = require('cors');
 const path = require('path');
+// const session = require('express-session');
 const app = express();
-const port = 3000; 
+const port = 3030;
 
 const url = 'mongodb://127.0.0.1:27017';
 const dbName = 'ITPE003-FinalOutput';
 const collectionName = 'users';
+let db;
+
+const uri = 'mongodb://127.0.0.1:27017/ITPE003-FinalOutput';
+const options = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+};
+
+
+let myUserObjectType = null;
+let myUsername = null;
+let myUserID = null;
+
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/img', express.static(path.join(__dirname, 'public/img')));
 app.use('/css', express.static(path.join(__dirname, 'public/css')));
-let db;
-
 
 async function connectToDatabase() {
-    const client = await MongoClient.connect(url, { useUnifiedTopology: true });
-    db = client.db(dbName);
+  const client = await MongoClient.connect(url, { useUnifiedTopology: true });
+  db = client.db(dbName);
 }
 
 app.use(express.json());
@@ -25,139 +37,256 @@ app.use(cors());
 
 // Set the view engine to EJS
 app.set('view engine', 'ejs');
+app.set('views', __dirname + '/views');
+
+app.get('/', (req, res) => {
+  // render homepage.ejs
+  res.render(path.join(__dirname, '/views/homepage.ejs'));
+});
 
 app.get('/home', (req, res) => {
-    //render homepage.ejs
-    res.render(path.join(__dirname, '/views/homepage.ejs'));
-}); 
+  // render homepage.ejs
+  res.render(path.join(__dirname, '/views/homepage.ejs'));
+});
+
+app.get('/about', async (req, res) => {
+  
+    try {
+      const client = await MongoClient.connect(uri, options);
+      const db = client.db();
+      const collection = db.collection('users');
+
+
+      // Fetch data from MongoDB
+      const itemData = await collection.find({objectType: 'shopItem', /* contains gundam*/ title}).limit(6).toArray();
+
+      // Render the EJS template and pass the data
+      res.render('about', { itemData});
+
+      // Remember to close the MongoDB connection
+      client.close();
+    } catch (err) {
+      console.error('Error fetching data from MongoDB:', err);
+      res.status(500).send('Internal Server Error');
+    }
+});
 
 app.get('/registernNewAccount', (req, res) => {
-    res.sendFile(path.join(__dirname, '/views/register.html'));
-}); 
+  res.sendFile(path.join(__dirname, '/views/register.html'));
+});
 
 app.post('/newAccountRegister', async (req, res) => {
-    const { username, userpass } = req.body;
-    console.log('Received request body:', req.body);
+  const { username, userpass } = req.body;
+  console.log('Received request body:', req.body);
 
-    try{
-        if(!db) {
-            console.log('Database connection is not established yet.');
-            return res.status(500).json({ error: 'Database connection is not ready.' });
-        }
-
-        await db.collection(collectionName).insertOne({
-            // add object types here
-            objectType: 'user',
-            username,
-            userpass,
-        });
-
-        console.log('Record Inserted Successfully!' + req.body);
-        res.status(201).json({ message: 'Record inserted successfully!' });
-
-    } catch (err) {
-        if (err.name === 'MongoError' && err.code === 11000) {
-            console.log('Duplicate entry for empid:', username);
-            return res.status(400).json({ error: 'The provided username already exists.' });
-        }
-
-        console.error('Duplicate entry for empid:', username);
-        return res.status(500).json({ error: 'An error occurred while inserting the record.' });
+  try {
+    if (!db) {
+      console.log('Database connection is not established yet.');
+      return res.status(500).json({ error: 'Database connection is not ready.' });
     }
+
+    await db.collection(collectionName).insertOne({
+      // INSERT USER OBJECT TYPE
+      objectType: 'user',
+      username,
+      userpass,
+      cartItems: [],
+    });
+
+    console.log('Record Inserted Successfully!' + req.body);
+    res.status(201).json({ message: 'Record inserted successfully!' });
+  } catch (err) {
+    if (err.name === 'MongoError' && err.code === 11000) {
+      console.log('Duplicate entry for empid:', username);
+      return res.status(400).json({ error: 'The provided username already exists.' });
+    }
+
+    console.error('Duplicate entry for empid:', username);
+    return res.status(500).json({ error: 'An error occurred while inserting the record.' });
+  }
 });
 
 app.get('/login-user', (req, res) => {
-    res.sendFile(path.join(__dirname, '/views/login-user.html'));
+  res.  sendFile(path.join(__dirname, '/views/login-user.html'));
 });
+
 app.get('/login-admin', (req, res) => {
-    res.sendFile(path.join(__dirname, '/views/login-admin.html'));
+  res.sendFile(path.join(__dirname, '/views/login-admin.html'));
 });
 
-app.get('/searchUser', async (req, res) => {
-    console.log('Received request query:', req.query);
-    const usernameQuery = req.query.username; // Assuming the query parameter is 'username'
+//LOGOUT
+app.get('/logout', (req, res) => {
+  myUserObjectType = null;
+  myUsername = null;
+  myUserID = null;
+  res.redirect('/home');
+});
 
-    try {
-        // Ensure the database connection is established before searching
-        if (!db) {
-            console.log('Database connection is not established yet.');
-            return res.status(500).json({ error: 'Database connection is not ready.' });
-        }
+//LOGIN USER
 
-        // Search for the student record with the provided username
-        const username = await db.collection(collectionName).findOne({ objectType: `user` , username: usernameQuery });
+app.get('/searchVerifyUser', async (req, res) => {
+  console.log('Received request query:', req.query);
+  const usernameQuery = req.query.username; // Assuming the query parameter is 'username'
+  const userpassQuery = req.query.userpass; // Assuming the query parameter is 'userpass'
 
-        if (username) {
-            console.log('Student found:', username);
-            res.status(200).json(username);
-        } else {
-            console.log('No user found with the provided username.');
-            res.status(404).json({ error: 'No user found with the provided username.' });
-        }
-    } catch (err) {
-        console.error('Error searching for username:', err);
-        res.status(500).json({ error: 'An error occurred while searching for the username.' });
+  try {
+    // Ensure the database connection is established before searching
+    if (!db) {
+      console.log('Database connection is not established yet.');
+      return res.status(500).json({ error: 'Database connection is not ready.' });
     }
+
+    // Search for the user record with the provided username
+    const user = await db.collection(collectionName).findOne({ objectType: 'user', username: usernameQuery });
+
+    if (user) {
+      // Check if the provided password matches the stored password
+      if (userpassQuery === user.userpass) {
+        console.log('Correct password.');
+        
+        myUserObjectType = user.objectType;
+        myUserID = user._id;
+
+        console.log(myUserID,myUserObjectType);
+
+        
+        res.status(200).json(user);
+      } else {
+        console.log('Incorrect password.');
+        res.status(401).json({ error: 'Incorrect password.' });
+      }
+    } else {
+      console.log('No user found with the provided username.');
+      res.status(404).json({ error: 'No user found with the provided username.' });
+    }
+  } catch (err) {
+    console.error('Error searching for username:', err);
+    res.status(500).json({ error: 'An error occurred while searching for the username.' });
+  }
+});
+
+app.get('/searchVerifyAdmin', async (req, res) => {
+  console.log('Received request query:', req.query);
+  const usernameQuery = req.query.username; // Assuming the query parameter is 'username'
+  const userpassQuery = req.query.userpass; // Assuming the query parameter is 'userpass'
+
+  try {
+    // Ensure the database connection is established before searching
+    if (!db) {
+      console.log('Database connection is not established yet.');
+      return res.status(500).json({ error: 'Database connection is not ready.' });
+    }
+
+    // Search for the admin record with the provided username
+    const user = await db.collection(collectionName).findOne({ objectType: 'admin', username: usernameQuery });
+
+    if (user) {
+      // Check if the provided password matches the stored password
+      if (userpassQuery === user.userpass) {
+        console.log('Correct password.');
+        
+        // Store the username in session storage
+        myUserObjectType = user.objectType;
+        console.log(myUserObjectType);
+        
+        res.status(200).json(user);
+      } else {
+        console.log('Incorrect password.');
+        res.status(401).json({ error: 'Incorrect password.' });
+      }
+    } else {
+      console.log('No user found with the provided username.');
+      res.status(404).json({ error: 'No user found with the provided username.' });
+    }
+  } catch (err) {
+    console.error('Error searching for username:', err);
+    res.status(500).json({ error: 'An error occurred while searching for the username.' });
+  }
+});
+
+app.get('/shop-dashboard', async (req, res) => {
+  if(myUserObjectType == 'admin') {
+    try {
+      const client = await MongoClient.connect(uri, options);
+      const db = client.db();
+      const collection = db.collection('users');
+      
+      // Fetch data from MongoDB
+      const data = await collection.find({objectType: 'shopItem'}).toArray();
+
+      // Render the EJS template and pass the data
+      res.render('shop-dashboard', { data });
+
+      // Remember to close the MongoDB connection
+      client.close();
+    } catch (err) {
+      console.error('Error fetching data from MongoDB:', err);
+      res.status(500).send('Internal Server Error');
+    } 
+  } else {
+    res.redirect('/login-admin');
+  }
+});
+
+app.get('/myAccount', async (req, res) => {
+  //verify if myObject type is user
+  if (myUserObjectType == 'user' || myUserObjectType == 'admin') {
+    try {
+      const client = await MongoClient.connect(uri, options);
+      const db = client.db();
+      const collection = db.collection('users');
+      
+      // Fetch data from MongoDB
+      const userInfo = await collection.find({_id: myUserID}).toArray();
+  
+      // Render the EJS template and pass the data
+      res.render('myAccount', { userInfo });
+  
+      // Remember to close the MongoDB connection
+      client.close();
+    } catch (err) {
+      console.error('Error fetching data from MongoDB:', err);
+      res.status(500).send('Internal Server Error');
+    } 
+  } else {
+    res.redirect('/login-user');
+  }
 });
 
 
 app.get('/shop', async (req, res) => {
-    try {
-        const shopItems = await db.collection(collectionName).find({ objectType: 'shopItem' }).toArray();
-        console.log(shopItems);
-        res.render('shop', { shopItems });
-    } catch (err) {
-        console.error('Error fetching shop items:', err);
-        res.status(500).send('Internal Server Error');
-    }
+  try {
+    const client = await MongoClient.connect(uri, options);
+    const db = client.db();
+    const collection = db.collection('users');
+
+    // Fetch data from MongoDB
+    const data = await collection.find({objectType: 'shopItem'}).toArray();
+
+    // Render the EJS template and pass the data
+    res.render('shop', { data });
+
+    // Remember to close the MongoDB connection
+    client.close();
+  } catch (err) {
+    console.error('Error fetching data from MongoDB:', err);
+    res.status(500).send('Internal Server Error');
+  }
 });
 
-// Define the route to handle adding an item to the user's cart
-app.post('/addToCart', express.json(), async (req, res) => {
-    const { itemId, itemTitle, itemPrice, itemStocksLeft, quantity } = req.body;
-  
-    try {
-      // Check if the item already exists in the cart for the user (you may need to include the user identifier in the request)
-      const existingCartItem = await db.collection(collectionName).findOne({
-        itemId,
-        /* Add user identifier filter if needed */
-      });
-  
-      if (existingCartItem) {
-        // Item already exists in the cart, update the quantity
-        const updatedQuantity = existingCartItem.quantity + quantity;
-  
-        // Check if the updated quantity exceeds the available stocks
-        if (updatedQuantity > itemStocksLeft) {
-          return res.status(400).json({ error: 'Quantity exceeds available stocks.' });
-        }
-  
-        // Update the quantity of the existing item in the cart
-        await db.collection(collectionName).updateOne(
-          { itemId },
-          { $set: { quantity: updatedQuantity } }
-        );
-      } else {
-        // Item does not exist in the cart, add a new entry
-        if (quantity > itemStocksLeft) {
-          return res.status(400).json({ error: 'Quantity exceeds available stocks.' });
-        }
-  
-        await db.collection(collectionName).insertOne({
-          itemId,
-          itemTitle,
-          itemPrice,
-          quantity,
-          /* Add user identifier if needed */
-        });
-      }
-  
-      res.status(200).json({ message: 'Item added to cart successfully.' });
-    } catch (err) {
-      console.error('Error adding item to cart:', err);
-      res.status(500).json({ error: 'An error occurred while adding the item to cart.' });
-    }
-  });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Start the server and connect to the database
 connectToDatabase()

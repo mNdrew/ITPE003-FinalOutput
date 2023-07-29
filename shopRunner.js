@@ -283,14 +283,3 @@ app.post('/DBcreateAccountForm', async (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
-
-// Start the server and connect to the database
-// connectToDatabase()
-//   .then(() => {
-//     app.listen(port, () => {
-//       console.log(`Server is running on http://localhost:${port}`);
-//     });
-//   })
-//   .catch((err) => {
-//     console.error('Error connecting to MongoDB:', err);
-//   });

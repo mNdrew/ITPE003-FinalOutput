@@ -52,11 +52,17 @@
     font-weight: bold;
     font-style: italic;
   }
+  .fp{
+    color: rgb(243, 106, 106);
+    /* ADD GLOW */
+    text-shadow: rgb(245, 156, 156) 1px 0 10px;
+    font-weight: bold;
+  }
 </style>
 <body class="">
     <nav class="navbar d-flex justify-content-center text-center bg-dark text-light" disable hidden>
         <div class="container-fluid py-3">
-          <a class="navbar-brand text-center text-light" href="/shop">Hobby Lobby</a>
+          <a class="navbar-brand text-center text-light myBrand" href="/shop">Hobby Lobby</a>
         </div>
         <div class="row">
             <table class="nav-link">
@@ -92,8 +98,8 @@
         </div>
     </section>
 
-    <section id="itemsForSale" class="px-5 py-4" >
-        <h2 class="mb-3">Featured Products</h2>
+    <section id="itemsForSale" class="px-5 py-4" hidden disabled>
+        <h2 class="fp">Featured Products</h2>
         <div class="row">
             <div class="col-md-6 col-lg-4 mb-4">
                 <div class="card">
@@ -125,6 +131,26 @@
                     </div>
                 </div>
             </div>
+            <!-- Add more products as needed -->
+        </div>
+    </section>
+
+    <section id="itemsForSale" class="px-5 py-4 centerItems" >
+        <h2 class="mb-3 centerItems mb-3 fp">Featured Products</h2>
+        <div class="row centerItems">
+            <% itemData.forEach((item) => { %>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card">
+                    <img src="<%= item.imageLink %>" alt="<%= item.title %>" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= item.title %></h5>
+                        <p class="card-text" hidden disabled>Product description and details.</p>
+                        <a type="button" class="btn btn-danger" href="/shop">Check on Shop</a>
+                    </div>
+                </div>
+            </div>
+            <% }); %>
+            
             <!-- Add more products as needed -->
         </div>
     </section>

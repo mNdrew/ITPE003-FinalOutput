@@ -1,11 +1,10 @@
 <html>
 <head>
-    <title>Log In</title>
+    <title>Shop</title>
     <meta charset="utf-8">
     <!-- IMPORT STYLE.CSS -->
     <link rel="stylesheet" type="text/css" href="/public/css/style.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
-
 
     <!-- IMPORT BOOTSTRAP -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,26 +17,11 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
 </head>
-<style>
-  body{
-    font-family: 'Inter', sans-serif;
-    font-family: 'Arial', 'Helvetica', sans-serif;
-    font-family: 'Poppins', sans-serif;
-  }
-  
-.material-symbols-outlined {
-font-variation-settings:
-'FILL' 0,
-'wght' 400,
-'GRAD' 0,
-'opsz' 48
-}
-</style>
-</style>
+
 <body class="">
     <nav class="navbar d-flex justify-content-center text-center bg-dark text-light" disable hidden>
         <div class="container-fluid py-3">
-          <a class="navbar-brand text-center text-light" href="/shop">Hobby Lobby</a>
+          <a class="navbar-brand text-center text-light myBrand" href="/shop">Hobby Lobby</a>
         </div>
         <div class="row">
             <table class="nav-link">
@@ -76,10 +60,10 @@ font-variation-settings:
             <th class="shopTableLabel border">Availability</th>
             <th class="shopTableLabel border">Image</th>
             <th class="shopTableLabel border">Quantity</th>
-            <th class="shopTableLabel border">Order</th>
+            <th class="shopTableLabel border">Add to Cart</th>
         </thead>
         <tbody class="border">
-            <% shopItems.forEach((item) => { %>
+            <% data.forEach((item) => { %>
             <tr class="shopTableItem">
                 <form id="<%= item.title %>">
                     <!-- TITLE -->
@@ -90,9 +74,11 @@ font-variation-settings:
                     <td class="text-align-center minWidth-50 border" id="">
                         ₱ <%= item.price %>
                     </td>
+                    
                     <!-- AVAILABILITY -->
                     <td class="text-align-center minWidth-50 border">
-                        <%= item.availability %>
+                        <%= item.availability %><br>
+                        <span><%= item.stocksleft %> stocks left</span>
                     </td>
 
                     <!-- IMAGE -->
@@ -110,7 +96,7 @@ font-variation-settings:
                         <a class="btn btn-success checkout-btn <%= item.shopAvailabilityShow %>" type="button"
                             data-item-id="<%= item._id %>" data-item-title="<%= item.title %>"
                             data-item-price="<%= item.price %>" data-item-stocksleft="<%= item.stocksleft %>"
-                            onclick="checkoutItem(event)">
+                            onclick="checkoutItem()">
                             <span class="material-symbols-outlined">shopping_cart_checkout</span>
                         </a>
                     </td>
@@ -119,8 +105,6 @@ font-variation-settings:
             <% }); %>
         </tbody>
         </table>
-
-
 
         <div class="cotnainer position-static d-grid" style="margin-left: 35%; margin-right: 35%;">
             <a href="#top" class="btn btn-secondary" type="button" disabled>Go Back to Top</a>
@@ -140,29 +124,8 @@ font-variation-settings:
             window.scrollTo(0, 0);
         };
         
-        function checkoutItem(itemId, quantity) {
-        // Send a request to the server to checkout the item
-        fetch(`/checkout/${itemId}?quantity=${quantity}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-        })
-        .then(response => response.json())
-        .then(data => {
-        // Handle the response from the server
-        if (data.success) {
-            alert('Item successfully checked out!');
-            // You may redirect the user to a success page or perform any other action here.
-        } else {
-            alert('Checkout failed. Please try again later.');
-        }
-        })
-        .catch(error => {
-        console.error('Error during checkout:', error);
-        alert('An error occurred during checkout.');
-        });
-    }
+        
+    
         
     
     </script>

@@ -23,7 +23,7 @@
     font-family: 'Arial', 'Helvetica', sans-serif;
     font-family: 'Poppins', sans-serif;
 
-    background-image: url("/img/bgs/aerial-bg.jpg");
+    background-image: url("/img/bgs/Kshatriya-bg.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-blend-mode: overlay;
@@ -36,7 +36,8 @@
 <body class="bg-success">
     <nav class="navbar d-flex justify-content-center text-center bg-dark text-light" disable hidden>
         <div class="container-fluid py-3">
-          <a class="navbar-brand text-center text-light" href="/shop">Hobby Lobby</a>
+          <a class="navbar-brand text-center text-light myBrand" href="/shop">Hobby Lobby</a>
+          
         </div>
         <div class="row">
             <table class="nav-link">
@@ -101,13 +102,6 @@
           </div>
         </div>
       </div>
-      
-            
-
-
-
-
-
 
     </main>
 
@@ -127,50 +121,42 @@
             x.type = "password";
           }
         }
-        function verifyFields(){
-          var userid = document.getElementById("userid").value;
-          var userpass = document.getElementById("userpass").value;
-          if(userid == "" || userpass == ""){
+        function verifyFields() {
+        var userid = document.getElementById("userid").value;
+        var userpass = document.getElementById("userpass").value;
+        if (userid == "" || userpass == "") {
             alert("Please fill in all fields");
             return false;
-          }
-          else{
+        } else {
             return true;
-            console.log()
-          }
         }
-        async function findUser(){
-          const usernameQuery = document.getElementById("userid").value;
+    }
 
-          try {
-            const response = await fetch(`/searchUser?&username=${usernameQuery}`);
-            const result = await response.json();
-            console.log
-            console.log(result);
+    async function loginMyUser() {
+        if (verifyFields()) {
+            const usernameQuery = document.getElementById("userid").value;
+            const userpassQuery = document.getElementById("userpass").value;
 
-            // return the userpass from the result
-            return result.userpass;
+            try {
+                const response = await fetch(`/searchVerifyUser?username=${usernameQuery}&userpass=${userpassQuery}`);
+                const result = await response.json();
+                console.log(result);
 
-          } catch (error) {
-            console.error('Error searching for Username:', error);
-            alert('An error occurred while searching for the Username.');
-          }
+                if (response.ok) {
+                    alert("Login Successful");
+                    location.replace("/home");
+                    resetForm();
+                } else {
+                    alert("Login Failed");
+                }
+            } catch (error) {
+                console.error('Error searching for Username:', error);
+                // alert('An error occurred while searching for the Username.');
+            }
         }
-
-        async function loginMyUser(){
-          if(verifyFields()){
-            if(await findUser() == document.getElementById("userpass").value){
-              alert("Login Successful");
-              // redirect to home 
-              location.replace("/home");
-              resetForm();
-            }
-            else{
-              alert("Login Failed");
-            }
-          }
+    }
           
-        }
+        
 
 
        
