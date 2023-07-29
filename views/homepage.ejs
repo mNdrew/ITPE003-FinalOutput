@@ -72,43 +72,28 @@
             <p>Explore our collection and find your favorite Gundam items today.</p>
         </div>
 
-        <h2 class="mb-3">Featured Products</h2>
-        <div class="row">
-            <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card">
-                    <img src="/img/items//HG_Gundam_Lfrith.webp" alt="Product 1" class="card-img-top">
-                    <div class="card-body">
-                        <h5 class="card-title">Product 1</h5>
-                        <p class="card-text">Product description and details.</p>
-                        <button class="btn btn-primary">Add to Cart</button>
+        <section id="itemsForSale" class="px-5 py-4 centerItems" >
+            <h2 class="mb-3 centerItems mb-3 fp">Featured Products</h2>
+            <div class="row centerItems">
+                <% itemData.forEach((item) => { %>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card">
+                        <img src="<%= item.imageLink %>" alt="<%= item.title %>" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= item.title %></h5>
+                            <p class="card-text" hidden disabled>Product description and details.</p>
+                            <a type="button" class="btn btn-danger" href="/shop">Check on Shop</a>
+                        </div>
                     </div>
                 </div>
+                <% }); %>
+                
+                <!-- Add more products as needed -->
             </div>
-            <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card">
-                    <img src="/img/items/HG_Zowort_Heavy.webp" alt="Product 2" class="card-img-top">
-                    <div class="card-body">
-                        <h5 class="card-title">Product 2</h5>
-                        <p class="card-text">Product description and details.</p>
-                        <button class="btn btn-primary">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card">
-                    <img src="/img/items/HG_Demi_Barding.webp" alt="Product 2" class="card-img-top">
-                    <div class="card-body">
-                        <h5 class="card-title">Product 2</h5>
-                        <p class="card-text">Product description and details.</p>
-                        <button class="btn btn-primary">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Add more products as needed -->
-        </div>
+        </section>
         
-        <h2 class="mb-3">Special Offer</h2>
-        <div class="row">
+        <h2 class="mb-3" hidden>Special Offer</h2>
+        <div class="row" hidden>
             <div class="col-md-6 col-lg-4 mb-4">
                 <div class="card">
                     <img src="/img/items/HG_Gundam_Pharact.webp" alt="Product 1" class="card-img-top">

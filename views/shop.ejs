@@ -78,7 +78,7 @@
                     <!-- AVAILABILITY -->
                     <td class="text-align-center minWidth-50 border">
                         <%= item.availability %><br>
-                        <span><%= item.stocksleft %> stocks left</span>
+                        <span hidden><%= item.stocksleft %> stocks left</span>
                     </td>
 
                     <!-- IMAGE -->
@@ -94,7 +94,13 @@
                     <!-- CHECKOUT BUTTON -->
                     <td class="text-align-center formValign-mid border">
                         <a class="btn btn-success checkout-btn" type="button"
-                            onclick="addToCart('<%= item._id %>','qty-<%= item._id %>')">
+                            onclick="addToCart(
+                                '<%= item._id %>',
+                                '<%= item.title %>',
+                                '<%= item.price %>',
+                                '<%= item.imageLink %>',
+                                'qty-<%= item._id %>'
+                                )">
                             <span class="material-symbols-outlined">shopping_cart_checkout</span>
                         </a>
                     </td>
@@ -121,15 +127,18 @@
             window.scrollTo(0, 0);
         };
 
-        async function addToCart(itemID, qtyItem) {
+        async function addToCart(itemID, itemTitle, itemPrice, itemImage, itemQuantityID) {
+            console.log("Button Pressed");
         // Parse the quantity from input field
-        let qtyItemValue = document.getElementById(qtyItem).value;
+        let itemQuantityValue = document.getElementById(itemQuantityID).value;
 
         // Check if the quantity is a valid number greater than 0
-        if (isNaN(qtyItemValue) || qtyItemValue <= 0) {
+        if (isNaN(itemQuantityValue) || itemQuantityValue <= 0) {
             alert("Please enter a valid quantity greater than 0");
             return; // Exit the function if quantity is not valid
-        }
+        } 
+        // multiple by price
+        let orderPrice = itemPrice * itemQuantityValue;
 
         // Create the item order object
         
@@ -137,7 +146,11 @@
         try {
             const itemOrder = {
             itemID: itemID,
-            qtyItem: qtyItemValue
+            itemImage: itemImage,
+            itemTitle: itemTitle,
+            itemPrice: itemPrice,
+            itemQuantityValue: itemQuantityValue,
+            orderPrice: orderPrice,
             };
             console.log(itemOrder);
             const response = await fetch('/usr-addToCart', {

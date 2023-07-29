@@ -43,27 +43,18 @@
         </div> 
     </nav>
 
-    <main>
-      <% formattedOutput.forEach((item) => { %>
-        <!-- INSERT CONTENT HERE -->
-        <h1>Account Profile</h1>
-
-        <div class="card text-start">
-          <div class="container py-2">
-            <div class="card-title">
-              <h1>Welcome to your profle, <%= item.username %>!</h1>
-            </div>
-            <div class="card-body">
-              <p class="card-text">Body</p>
-            </div>
-            <!-- for every object in the arrray cartItems, do this -->
-            <%= item.cartItems%>
+    <main class="mx-5 px-5 centerItems">
+      <div class="card text-start mx-5">
+        <div class="card-body">
+          <h4 class="card-title">My Account</h4>
+          <div class="row justify-content-center align-items-center g-2">
+            
+          </div>
+          <div class="container centerItems"> 
+            <a href="/logout" type="button" class="btn btn-secondary">Log Out</a>
           </div>
         </div>
-
-
-
-        <% }); %>
+      </div>
 
     </main>
 

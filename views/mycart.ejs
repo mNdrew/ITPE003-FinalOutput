@@ -60,59 +60,46 @@
 
     <main>
         <h1>My Cart</h1>
-
-
         <table class="table border table-striped">
             <thead>
                 <th class="shopTableLabel border">Item Name</th>
                 <th class="shopTableLabel border">Price</th>
-                <th class="shopTableLabel border">Availability</th>
                 <th class="shopTableLabel border">Image</th>
                 <th class="shopTableLabel border">Quantity</th>
-                <th class="shopTableLabel border">Add to Cart</th>
+                <th class="shopTableLabel border">Check out</th>
             </thead>
             <tbody class="border">
-                <% userCart.forEach((item) => { %>
+                <% dataCart.forEach((item) => { %>
                 <tr class="cartItem">
                     <!-- <form id="formItm-<%= item._id %>"> -->
-                        <!-- TITLE -->
-                        <td class="shopItemLabel border">
-                            <%= item.title %>
-                        </td>
-                        <!-- PRICE -->
-                        <td class="text-align-center minWidth-50 border" id="">
-                            ₱ <%= item.price %>
-                        </td>
-                        
-                        <!-- AVAILABILITY -->
-                        <td class="text-align-center minWidth-50 border">
-                            <%= item.availability %><br>
-                            <span><%= item.stocksleft %> stocks left</span>
-                        </td>
-    
-                        <!-- IMAGE -->
-                        <td class="text-align-center minWidth-50 border">
-                            <img src="<%= item.imageLink %>" alt="<%= item.title%>" class="img-thumb">
-                        </td>
-    
-                        <!-- QUANTITY -->
-                        <td name="QTY-<%= item.stocksleft %>" class="text-align-center formValign-mid border">
-                            <input type="number" class="form-control " id="qty-<%= item._id %>" name="quantity" min="1" max="<%= item.stocksleft %>" required>
-                        </td>
+                    <!-- TITLE -->
+                    <td class="shopItemLabel border">
+                        <%= item.cartItemTitle %>
+                    </td>
+                    <!-- PRICE -->
+                    <td class="text-align-center minWidth-50 border" id="">
+                        ₱ <%= item.cartItemPrice %>
+                    </td>
+                    
+                    <!-- IMAGE -->
+                    <td class="text-align-center minWidth-50 border">
+                        <img src="<%= item.cartItemImage %>" alt="<%= item.title%>" class="img-thumb">
+                    </td>
+
+                    <!-- QUANTITY -->
+                    <td name="QTY-<%= item.stocksleft %>" class="text-align-center formValign-mid border">
+                        <input type="number" name="quantity" id="quantity" min="1" max="<%= item.stocksleft %>" value="<%= item.cartItemQuantity %>" class="form-control">
+                    </td>
                     <!-- </form> -->
-                        <!-- CHECKOUT BUTTON -->
-                        <td class="text-align-center formValign-mid border">
-                            <a class="btn btn-success checkout-btn" type="button"
-                                onclick="addToCart('<%= item._id %>','qty-<%= item._id %>')">
-                                <span class="material-symbols-outlined">shopping_cart_checkout</span>
-                            </a>
-                        </td>
+                    <td>
+                        <button class="checkout-btn" onclick="checkout()">Checkout</button>
+                    </td>
                 </tr>
                 <% }); %>
             </tbody>
             </table>
 
-        <div class="text-center mt-4">
+        <div class="text-center mt-4" hidden>
             <button class="checkout-btn" onclick="checkout()">Checkout</button>
         </div>
 
@@ -131,6 +118,7 @@
         function checkout() {
             // Implement the actual checkout functionality here
             alert("Proceed to checkout!");
+
         }
 
 

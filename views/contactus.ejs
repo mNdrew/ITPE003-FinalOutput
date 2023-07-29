@@ -69,8 +69,8 @@
         <div class="container">
           <div class="row justify-content-center">
             <div class="col-md-6">
-              <div class="header-text">How can we help?</div>
-              <div class="sub-header-text">Send us a message!</div>
+              <div class="header-text text-dark">How can we help?</div>
+              <div class="sub-header-text text-dark">Send us a message!</div>
             </div>
           </div>
         </div>
@@ -80,28 +80,29 @@
           <div class="card container-fluid">
             <div class="card-body"> 
               <h2 class="">Contact Us</h2>
-              <form action="/contact-form-submit" method="post" class="">
-
+              
+              <form id="contactForm">
                 <div class="row">
                   <label for="name" class="mb-3">Name</label>
                   <input type="text" class="form-control" id="name" name="name" required>
                 </div>
-
+              
                 <div class="row">
                   <label for="email" class="mb-3">Email</label>
                   <input type="email" class="form-control" id="email" name="email" required>
                 </div>
-
+              
                 <div class="row">
                   <label for="message" class="mb-3">Message</label>
                   <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
                 </div>
-
+              
                 <div class="row d-grid">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-primary" onclick="contactFormSubmit() ">Submit</button>
                 </div>
-
               </form>
+              
+              
             </div>
           </div>
         </div>
@@ -186,7 +187,14 @@
     </footer>
     <script>
         // INSERT SCRIPT HERE
-       
+        async function submitForm() {
+        const form = document.getElementById('contactForm');
+        const formData = new FormData(form);
+
+        const response = await fetch('/api/contact', {
+            method: 'POST',
+            body: formData
+        });
 
 
     </script>
