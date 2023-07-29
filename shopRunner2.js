@@ -87,10 +87,7 @@ app.post('/contact-form-submit', async (req, res) => {
 
 app.get('/contact', async (req, res) => {
   try {
-    const client = await MongoClient.connect(uri, options);
-      const db = client.db();
-      const collection = db.collection('messages');
-      
+    // Ensure the database connection is established before fetching messages
     if (!db) {
       console.log('Database connection is not established yet.');
       return res.status(500).json({ error: 'Database connection is not ready.' });
