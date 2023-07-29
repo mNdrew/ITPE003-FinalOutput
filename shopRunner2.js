@@ -87,12 +87,25 @@ app.post('/contact-form-submit', async (req, res) => {
 
 app.get('/contact', async (req, res) => {
   try {
-    // Ensure the database connection is established before fetching messages
+    const client = await MongoClient.connect(uri, options);
+      const db = client.db();
+      const collection = db.collection('messages');
+      
     if (!db) {
       console.log('Database connection is not established yet.');
       return res.status(500).json({ error: 'Database connection is not ready.' });
     }
 
+    // Fetch all messages from the messages collection
+    const messages = await db.collection('messages').find({}).toArray();
+
+    // Render the EJS template and pass the messages data
+    res.render('contactus', { messages });
+  } catch (err) {
+    console.error('Error fetching messages:', err);
+    res.status(500).send('Internal Server Error');
+  }
+});
 
 
 app.get('/about', async (req, res) => {
