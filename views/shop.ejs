@@ -65,7 +65,7 @@
         <tbody class="border">
             <% data.forEach((item) => { %>
             <tr class="shopTableItem">
-                <form id="<%= item.title %>">
+                <!-- <form id="formItm-<%= item._id %>"> -->
                     <!-- TITLE -->
                     <td class="shopItemLabel border">
                         <%= item.title %>
@@ -87,20 +87,17 @@
                     </td>
 
                     <!-- QUANTITY -->
-                    <td class="text-align-center formValign-mid border">
-                        <input type="number" class="form-control " id="quantity" name="quantity" min="0" max="<%= item.stocksleft %>" value="" <%= item.shopAvailabilityShow%>>
+                    <td name="QTY-<%= item.stocksleft %>" class="text-align-center formValign-mid border">
+                        <input type="number" class="form-control " id="qty-<%= item._id %>" name="quantity" min="1" max="<%= item.stocksleft %>" required>
                     </td>
-
+                <!-- </form> -->
                     <!-- CHECKOUT BUTTON -->
                     <td class="text-align-center formValign-mid border">
-                        <a class="btn btn-success checkout-btn <%= item.shopAvailabilityShow %>" type="button"
-                            data-item-id="<%= item._id %>" data-item-title="<%= item.title %>"
-                            data-item-price="<%= item.price %>" data-item-stocksleft="<%= item.stocksleft %>"
-                            onclick="checkoutItem()">
+                        <a class="btn btn-success checkout-btn" type="button"
+                            onclick="addToCart('<%= item._id %>','qty-<%= item._id %>')">
                             <span class="material-symbols-outlined">shopping_cart_checkout</span>
                         </a>
                     </td>
-                </form>
             </tr>
             <% }); %>
         </tbody>
@@ -123,7 +120,45 @@
         var scrollTop = function() {
             window.scrollTo(0, 0);
         };
+
+        async function addToCart(itemID, qtyItem) {
+        // Parse the quantity from input field
+        let qtyItemValue = document.getElementById(qtyItem).value;
+
+        // Check if the quantity is a valid number greater than 0
+        if (isNaN(qtyItemValue) || qtyItemValue <= 0) {
+            alert("Please enter a valid quantity greater than 0");
+            return; // Exit the function if quantity is not valid
+        }
+
+        // Create the item order object
         
+
+        try {
+            const itemOrder = {
+            itemID: itemID,
+            qtyItem: qtyItemValue
+            };
+            console.log(itemOrder);
+            const response = await fetch('/usr-addToCart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(itemOrder)
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to add item to cart');
+            }
+                console.log('Item added to cart successfully');
+            } catch (error) {
+                console.error('Error adding to cart', error);
+            }
+        }
+
+
+
         
     
         

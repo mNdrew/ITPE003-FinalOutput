@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Hobby Lobby | My Account</title>
+    <title>Hobby Lobby | Contact Us</title>
     <meta charset="utf-8">
     <!-- IMPORT STYLE.CSS -->
     <link rel="stylesheet" type="text/css" href="/public/css/style.css">
@@ -22,6 +22,25 @@
     font-family: 'Inter', sans-serif;
     font-family: 'Arial', 'Helvetica', sans-serif;
     font-family: 'Poppins', sans-serif;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: multiply;
+    background-image: url('/img/bgs/gundam-rx-78.jpg');
+    backdrop-filter: blur(2px);
+    background-color: rgb(235, 235, 235);
+    color: white;
+  }
+  #Technical-Support-Team{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: multiply;
+    /* filter:blur(10px); */
+    /* filter: grayscale(100%);  */
+    background-color: rgb(4, 24, 58);
+    border-radius: 10px;
+    color: white;
+    padding: 30px;
+
   }
 </style>
 <body class="">
@@ -43,27 +62,14 @@
         </div> 
     </nav>
 
-    <main>
-      <% formattedOutput.forEach((item) => { %>
+    <main class="container mt-4 gap-2">
+
+
         <!-- INSERT CONTENT HERE -->
-        <h1>Account Profile</h1>
+       
+      
+      
 
-        <div class="card text-start">
-          <div class="container py-2">
-            <div class="card-title">
-              <h1>Welcome to your profle, <%= item.username %>!</h1>
-            </div>
-            <div class="card-body">
-              <p class="card-text">Body</p>
-            </div>
-            <!-- for every object in the arrray cartItems, do this -->
-            <%= item.cartItems%>
-          </div>
-        </div>
-
-
-
-        <% }); %>
 
     </main>
 
@@ -72,27 +78,9 @@
             <p>Hobby Lobby - Cayetano, Guinto, Rosete, Velasco, Velasquez</p>
         </div>
     </footer>
-
     <script>
         // INSERT SCRIPT HERE
-
-      async function logout(){
-        let response = await fetch('/logout', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json;charset=utf-8'
-          },
-          body: JSON.stringify({})
-        });
-
-        let result = await response.json();
-        console.log(result);
-        if(result.success){
-          window.location.href = '/home';
-        }
-      }
-
-     
+       
 
 
     </script>
