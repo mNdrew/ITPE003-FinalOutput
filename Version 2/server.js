@@ -120,9 +120,18 @@ app.get('/page-shop-development', async (req, res) => {
 });
 
 
-// ROUTE TO 404 WHEN ROUTE IS NOT FOUND
-app.use(function(req, res, next) {
-    res.status(404).sendFile('\\views\\404.html', {root: __dirname});
+
+
+
+
+
+// LOGINS 
+app.get('/login', async (req, res) => {
+    res.render('account-login-user');
+});
+
+app.get('/login-admin', async (req, res) => {
+  res.render('account-login-admin');
 });
 
 
@@ -154,15 +163,16 @@ app.use(function(req, res, next) {
 
 
 
+// ROUTE TO 404 WHEN ROUTE IS NOT FOUND
+app.use(function(req, res, next) {
+  res.status(404).sendFile('\\views\\404.html', {root: __dirname});
+});
 
-
-
-
-
-
-
-
-
+// 404 ROUTE FOR Error: Failed to lookup view 
+app.use(function(err, req, res, next) {
+  console.error(err.stack);
+  res.status(404).sendFile('\\views\\404.html', {root: __dirname});
+});
 
 // Start the server and connect to the database
 connectToDatabase()

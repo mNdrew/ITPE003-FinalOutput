@@ -141,7 +141,7 @@ app.post('/newAccountRegister', async (req, res) => {
 });
 
 app.get('/login-user', (req, res) => {
-  res.  sendFile(path.join(__dirname, '/views/login-user.html'));
+  res.sendFile(path.join(__dirname, '/views/login-user.html'));
 });
 
 app.get('/login-admin', (req, res) => {
