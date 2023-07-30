@@ -1,0 +1,31 @@
+<html>
+<head>
+    <title>LogIn</title>
+    <meta charset="utf-8">
+    <!-- IMPORT STYLE.CSS -->
+    <link rel="stylesheet" type="text/css" href="/public/css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+
+    <!-- IMPORT BOOTSTRAP -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    
+    <!-- GOOGLE FONTS Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins&display=swap" rel="stylesheet">
+</head>
+<body>
+    <form action="/user" method="post">
+        <h2>Login</h2>
+        <div class="input-field">
+            <input type="text" name="username" id="username" placeholder="Enter Username">
+        </div>
+        <div class="input-field">
+            <input type="password" name="password" id="password" placeholder="Enter Password">
+        </div>
+        <input type="submit" value="LogIn">
+    </form>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<html>
+<head>
+    <title>Page Title</title>
+    <meta charset="utf-8">
+    <!-- IMPORT STYLE.CSS -->
+    <link rel="stylesheet" type="text/css" href="/public/css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+
+    <!-- IMPORT BOOTSTRAP -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    
+    <!-- GOOGLE FONTS Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins&display=swap" rel="stylesheet">
+</head>
+<style>
+    body{
+      font-family: 'Inter', sans-serif;
+      font-family: 'Arial', 'Helvetica', sans-serif;
+      font-family: 'Poppins', sans-serif;    
+    }
+  </style>
+<body>
+    <nav class="nav nav-tabs flex-column justify-content-center text-center bg-dark text-light py-3">
+        <a href="/" class="navbar-brand" id="navbarBrand">HobbyLobby</a>
+        <ul class="nav justify-content-center text-light">
+            <li class="nav-item">
+                <a class="px-3 text-light" href="/page-home">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="px-3 text-light" href="/page-shop">Shop</a>
+            </li>
+            <li class="nav-item">
+                <a class="px-3 text-light" href="/page-userCart">My Cart</a>
+            </li>
+            <li class="nav-item">
+                <a class="px-3 text-light" href="/page-userProfile">My Account</a>
+            </li>
+            <li class="nav-item">
+                <a class="px-3 text-light" href="/page-about">About</a>
+            </li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="shopItems">
+            <table class="table border table-striped ">
+                <thead>
+                    <th class="shopTableLabel border">Item Name</th>
+                    <th class="shopTableLabel border">Price</th>
+                    <th class="shopTableLabel border">Update Availability</th>
+                    <th class="shopTableLabel border">Stocks</th>
+                    <th class="shopTableLabel border">Image</th>
+                    <th class="shopTableLabel border">Remove Item</th>
+                    <th class="shopTableLabel border">Update Item</th>
+                </thead>
+                <tbody>
+                    <% shopItems.forEach((item) => { %>
+                    <tr class="shopTableItem">
+                        <!-- <td class="shopItemLabel"><%= item.title %></td> -->
+                        <td class="text-align-center formValign-mid minWidth-50 border" id="">
+                            <input class="form-control" type="text" value="<%= item.title %>">
+                        </td>
+                        <td class="text-align-center formValign-mid minWidth-50" id="">
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1">₱</span>
+                                <input type="text" class="form-control" value="<%= item.price %>">
+                            </div>
+                        </td>
+                        <td class="text-align-center formValign-mid minWidth-50 border">
+                            <!-- CREATE OPTION FOR AVAILABILITY -->
+                            <select name="availability" class="form-select" id="availability">
+                                <option value="<%= item.availability %>" default hidden><%= item.availability %></option>
+                                <option value="Available">Available</option>
+                                <option value="Unavailable">Unavailable</option>
+                            </select>
+                        </td>
+                        <td class="text-align-center formValign-mid border">
+                            <input class="form-control" type="number" min="0" value="<%= item.stocksleft %>">
+                        </td>
+                        <td class="text-align-center minWidth-50 border">
+                            <img src="<%= item.imageLink %>" alt="<%= item.title%>" class="img-thumb">
+                        </td>
+                        <td class="text-align-center formValign-mid border">
+                            <a class="btn btn-danger" type="button" id="<%= item._id%>" onclick="removeItem('<%= item._id%>')">Remove</a>
+                        </td>
+                        <td class="text-align-center formValign-mid border">
+                            <a class="btn btn-warning position-relative" type="button" id="<%= item._id%>" >Update</a>
+                        </td>
+                    </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </section>
+
+
+
+
+
+
+    </main>
+
+    <footer class="footer py-3">
+        <div class="container">Hobby Lobby</div>
+    </footer>   
+    <script>
+
+    </script>
+</body>
+</html>
