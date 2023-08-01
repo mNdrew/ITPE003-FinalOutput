@@ -1,0 +1,23 @@
+{
+  "name": "optimized",
+  "version": "0.0.1",
+  "description": "Optimized version of the ecommerce website for hobby lobby. Particularly in the CRUD operations ",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "author": "mNdrew, MCVelasco, shr, WallyRosete, BenGuinto",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.3.1",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "mongodb": "^5.7.0",
+    "mongoose": "^7.4.1",
+    "nodemon": "^3.0.1"
+  }
+}
