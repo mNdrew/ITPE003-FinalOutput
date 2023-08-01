@@ -21,7 +21,8 @@ const options = {
 
 
 let myUserObjectType = null;
-let myUsername = null;
+let mycart = null;
+let mysername = null;
 let myUserID = null;
 
 

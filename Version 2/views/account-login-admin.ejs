@@ -33,9 +33,9 @@
     
   }
 </style>
-<body class="bg-danger">
+<body class="bg-danger" onload="resetFields()">
   <nav class="nav nav-tabs flex-column justify-content-center text-center bg-dark text-light py-3">
-    <a href="/" class="navbar-brand" id="navbarBrand">HobbyLobby</a>
+    <a href="/" class="navbar-brand" id="navbarBrand"><span class="myBrand">HobbyLobby</span></a>
     <ul class="nav justify-content-center text-light">
         <li class="nav-item">
             <a class="px-3 text-light" href="/page-home">Home</a>
@@ -50,14 +50,17 @@
             <a class="px-3 text-light" href="/page-userProfile">My Account</a>
         </li>
         <li class="nav-item">
+          <a class="px-3 text-light" href="/page-contactUs">Contact Us</a>
+        </li>
+        <li class="nav-item">
             <a class="px-3 text-light" href="/page-about">About</a>
         </li>
     </ul>
   </nav>
 
-    <main class="container container-fluid" >
+    <main class="container container-fluid">
         <!-- INSERT CONTENT HERE -->
-        <div class="card container-fluid" id="logincard">
+        <div class="card container-fluid" id="logincard" style="max-width: 400px;">
           <div class="card-body">
   
             <div class="form-group">
@@ -68,39 +71,35 @@
                 </div>
               </div>
             
-              <form id="userLoginForm">
+              <form id="adminLoginForm">
+                <input type="hidden" name="admin" value="true" hidden>
                 <div class="container">
-                  <label for="userid">Username</label>
-                  <input  class="form-control" type="text" id="userid" name="userid" required placeholder="Input Usernmame">
+                  <label for="userName">Username</label>
+                  <input  class="form-control" type="text" id="userName" name="userName" required placeholder="Input Usernmame">
                 </div>
                 <div class="container">
-                  <label for="userpass">Password</label>
-                  <input  class="form-control" type="password" id="userpass" name="userpass" required placeholder="Type your Password">
+                  <label for="userPass">Password</label>
+                  <input  class="form-control" type="password" id="userPass" name="userPass" required placeholder="Type your Password">
                 </div>
                 <div class="container pt-1 px-3">              
                   <div class="row">
                     <div class="col">
-                      <input class="checkbox" type="checkbox" onclick="showPassword()"><span>Show Password</span>
-                    </div>
-                    <div class="col mw-100 text-end" hidden>
-                      <label><a href="" class="form-check-label">Forgot password?</a></label>
+                      <input class="checkbox" type="checkbox" onclick="showPassword()"><span>  Show Password</span>
                     </div>
                   </div>
                 </div>
-              </form>
+              
   
-              <div class="container">
-                <div class="d-grid">
-                  <button type="button" class="btn btn-danger" id="loginBtn" onclick="loginMyUser()">Log in</button>
-                </div>
-                <div class="container centerItems pt-2">
-                  <div class="row">
-                    <a href="/login-admin" class="txt-reset txt-subtle">Login as Admin</a>
-                  </div>
-                  <div class="row">
-                    <a href="/registernNewAccount" class="txt-reset txt-subtle">Create New Account</a>
-                  </div>
-                </div>
+                <div class="container">
+                    <div class="d-grid">
+                    <button type="button" class="btn btn-danger" id="loginBtn" onclick="sendAdminVerify()">Log in</button>
+                    </div>
+                    <div class="container centerItems pt-2">
+                    <div class="row">
+                        <a href="/login" class="txt-reset txt-subtle">Login as User</a>
+                    </div>
+                    </div>
+                </form>
               </div>
   
             </div>
@@ -118,7 +117,7 @@
     <script>
         // TOGGLE PASSWORD SCRIPT
         function showPassword() {
-          var x = document.getElementById("userpass");
+          var x = document.getElementById("userPass");
           if (x.type === "password") {
             x.type = "text";
           } else {
@@ -127,44 +126,51 @@
         }
         
         function verifyFields() {
-          var userid = document.getElementById("userid").value;
-          var userpass = document.getElementById("userpass").value;
-          if (userid == "" || userpass == "") {
+          var userName = document.getElementById("userName").value;
+          var userPass = document.getElementById("userPass").value;
+          if (userName == "" || userPass == "") {
               alert("Please fill in all fields");
               return false;
           } else {
               return true;
           }
         }
+
         function resetFields(){
-          document.getElementById("userid").value = "";
-          document.getElementById("userpass").value = "";
+          document.getElementById("userName").value = "";
+          document.getElementById("userPass").value = "";
         }
 
-    async function loginAdmin() {
-        if (verifyFields()) {
-            const usernameQuery = document.getElementById("userid").value;
-            const userpassQuery = document.getElementById("userpass").value;
+       async function sendAdminVerify(){
+            if(!verifyFields()){
+            return;
+            } else {
+                var userName = document.getElementById("userName").value;
+                var userPass = document.getElementById("userPass").value;
+                var admin = true;
 
-            try {
-                const response = await fetch(`/searchVerifyAdmin?username=${usernameQuery}&userpass=${userpassQuery}`);
-                const result = await response.json();
-                console.log(result);
+                console.log(userName, userPass, admin)
 
-                if (response.ok) {
-                    alert("Login Successful");
-                    location.replace("/shop-dashboard");
-                    resetFields();
+                var response = await fetch('/sendAdminVerify', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                        body: JSON.stringify({admin: admin, userName: userName, userPass: userPass})
+                });
+
+                var result = await response.text();
+
+
+                if(result == "success"){
+                window.location.href = "/admin-dashboard";
+                alert("Login Successful");
                 } else {
-                    alert("Login Failed");
-                    resetFields();
+                alert("Invalid Credentials");
+                resetFields();
                 }
-            } catch (error) {
-                console.error('Error searching for Username:', error);
-                // alert('An error occurred while searching for the Username.');
             }
         }
-    }
           
         
 
